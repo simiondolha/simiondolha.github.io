@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simi Dolha - Application for FPI Programme Manager Position</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.8;
+            color: #1B1B1B;
+            background: linear-gradient(135deg, #C4C5BA 0%, #E4E4DE 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #E4E4DE;
+            box-shadow: 0 20px 60px rgba(27, 27, 27, 0.15);
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        header {
+            background: #1B1B1B;
+            color: #E4E4DE;
+            padding: 60px 40px;
+            text-align: center;
+            border-bottom: 4px solid #595f39;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 25px;
+        }
+
+        .profile-img {
+            border-radius: 50%;
+            border: 6px solid #595f39;
+            box-shadow: 0 8px 20px rgba(27, 27, 27, 0.4);
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #E4E4DE;
+        }
+
+        .subtitle {
+            font-size: 1.15em;
+            opacity: 0.9;
+            font-weight: 300;
+            color: #C4C5BA;
+            font-style: italic;
+        }
+
+        .job-title {
+            background: #595f39;
+            color: #E4E4DE;
+            padding: 18px 35px;
+            border-radius: 0;
+            display: inline-block;
+            margin-top: 25px;
+            font-weight: 400;
+            font-size: 0.95em;
+            letter-spacing: 0.5px;
+        }
+
+        .content {
+            padding: 60px 70px;
+            background: #E4E4DE;
+        }
+
+        section {
+            margin-bottom: 60px;
+        }
+
+        h2 {
+            color: #1B1B1B;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #595f39;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        h3 {
+            color: #595f39;
+            font-size: 1.6em;
+            margin: 35px 0 18px 0;
+            font-weight: 400;
+        }
+
+        p {
+            margin-bottom: 22px;
+            font-size: 1.05em;
+            text-align: justify;
+            color: #1B1B1B;
+            line-height: 1.9;
+        }
+
+        .highlight-box {
+            background: #C4C5BA;
+            padding: 35px;
+            border-radius: 0;
+            margin: 35px 0;
+            border-left: 6px solid #595f39;
+            box-shadow: 0 4px 15px rgba(27, 27, 27, 0.08);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: #C4C5BA;
+            padding: 30px;
+            border-radius: 0;
+            text-align: center;
+            border: 2px solid #595f39;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(27, 27, 27, 0.15);
+            background: #1B1B1B;
+        }
+
+        .stat-card:hover .stat-number {
+            color: #E4E4DE;
+        }
+
+        .stat-card:hover .stat-label {
+            color: #C4C5BA;
+        }
+
+        .stat-number {
+            font-size: 2.8em;
+            font-weight: 400;
+            color: #595f39;
+            display: block;
+            font-family: 'Georgia', serif;
+        }
+
+        .stat-label {
+            color: #1B1B1B;
+            font-size: 0.9em;
+            margin-top: 12px;
+            font-weight: 400;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .video-card {
+            background: #C4C5BA;
+            border-radius: 0;
+            overflow: hidden;
+            border: 2px solid #595f39;
+            transition: all 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(27, 27, 27, 0.15);
+        }
+
+        .video-card h4 {
+            padding: 22px;
+            background: #595f39;
+            color: #E4E4DE;
+            font-size: 1.05em;
+            font-weight: 400;
+        }
+
+        .video-card a {
+            display: block;
+            padding: 22px;
+            color: #1B1B1B;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .video-card a:hover {
+            background: #1B1B1B;
+            color: #E4E4DE;
+        }
+
+        .articles-section {
+            background: #C4C5BA;
+            padding: 35px;
+            border-radius: 0;
+            margin: 35px 0;
+            border: 2px solid #595f39;
+        }
+
+        .article-link {
+            display: block;
+            padding: 25px;
+            margin: 18px 0;
+            background: #E4E4DE;
+            border-radius: 0;
+            color: #1B1B1B;
+            text-decoration: none;
+            border-left: 5px solid #595f39;
+            transition: all 0.3s;
+        }
+
+        .article-link:hover {
+            transform: translateX(10px);
+            background: #1B1B1B;
+            color: #E4E4DE;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .skill-tag {
+            background: #595f39;
+            color: #E4E4DE;
+            padding: 12px 24px;
+            border-radius: 0;
+            font-size: 0.95em;
+            font-weight: 400;
+            border: 1px solid #1B1B1B;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: #1B1B1B;
+            transform: translateY(-2px);
+        }
+
+        .contact-info {
+            background: #1B1B1B;
+            color: #E4E4DE;
+            padding: 50px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 4px solid #595f39;
+        }
+
+        .contact-info a {
+            color: #C4C5BA;
+            text-decoration: none;
+            margin: 0 18px;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #E4E4DE;
+        }
+
+        .passion-section {
+            background: #595f39;
+            color: #E4E4DE;
+            padding: 45px;
+            border-radius: 0;
+            margin: 45px 0;
+            border: 3px solid #1B1B1B;
+        }
+
+        .passion-section h3 {
+            color: #E4E4DE;
+        }
+
+        .passion-section p {
+            color: #E4E4DE;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 35px 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .profile-section {
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile-section">
+                <img 
+                    src="https://lh3.googleusercontent.com/pw/AP1GczNNTYF1a7J3HIwss_IFKq6dWcG-MxGMFyKsZcfLDo4plQmE8igqRnvJuJUQP5rKmy36nIWb6-5XtKnJk-rZ3b9CZgqgz2AkQ9Eh-6zhPH12LxewoBvHBWIr-LA7hjzC1716kHl2FxzHdGZgiCJw8SUDvg=w750-h911-s-no-gm?authuser=0" 
+                    alt="Simi Dolha Profile Picture" 
+                    width="150"
+                    class="profile-img">
+                <div>
+                    <h1>Simi Dolha</h1>
+                    <p class="subtitle">Technical Project Manager | Crisis Management Expert | UEFA B Football Coach</p>
+                </div>
+            </div>
+            <div class="job-title">
+                Applying for: International Relations Officer - Programme Manager (AD5/AD12)<br>
+                FPI.1.001 Multi-domain Security
+            </div>
+        </header>
+
+        <div class="content">
+            <section>
+                <h2>Why I'm Writing This</h2>
+                <p>When I saw the vacancy for Programme Manager in FPI.1 focusing on CBRN and multi-domain security, something clicked. After over a decade managing critical security and infrastructure projects at the Council of the EU and coordinating 26 massive EU civil protection exercises involving thousands of participants, I realized this role isn't just a career move. It's where my experience meets purpose.</p>
+                
+                <p>This isn't your typical motivation letter. I've never been good at the formal "Dear Sir/Madam" approach anyway. Instead, let me tell you why I think I can make a real difference in this role and why the work you do at FPI matters to me personally.</p>
+            </section>
+
+            <div class="highlight-box">
+                <h3>The Security Clearance Question? Already Sorted.</h3>
+                <p>Let's get the obvious out of the way first. Yes, I hold EU SECRET clearance valid until 2027. Check that box. But more importantly, I've spent over a decade working in environments where security isn't just a requirement; it's embedded in everything we do.</p>
+            </div>
+
+            <section>
+                <h2>What I Bring to the Table</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">17+</span>
+                        <span class="stat-label">Years of Experience</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">12+</span>
+                        <span class="stat-label">Years in EU Institutions</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">€10M+</span>
+                        <span class="stat-label">Annual Budget Managed</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">26</span>
+                        <span class="stat-label">EU Modex Exercises Coordinated</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">37</span>
+                        <span class="stat-label">Countries Coordinated</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">€247M</span>
+                        <span class="stat-label">Largest Project Value</span>
+                    </div>
+                </div>
+
+                <h3>Project Management That Actually Works</h3>
+                <p>The vacancy asks for 5 years of project management experience. I'll do you one better. Since 2008, I've been managing projects that matter. Try managing a project where 700 participants from 37 countries need to simulate a major disaster response over 5 days. Now do that 26 times. Each exercise is essentially a €2-3M project with zero room for failure because when you're training Europe's civil protection teams, people's lives eventually depend on the quality of that training.</p>
+
+                <p>At the Council, I've managed everything from €247M inter-institutional energy procurement to €8M fire safety renovations. But here's what matters more than the numbers: every single project required navigating complex stakeholder landscapes, managing tight deadlines and ensuring compliance with regulations that would make your head spin. Sound familiar to what you need at FPI?</p>
+
+                <h3>CBRN? Been There, Coordinated That</h3>
+                <p>The job focuses heavily on Chemical, Biological, Radiological and Nuclear threats. During my time coordinating EU Modex exercises and working with the European Commission's ERCC, CBRN scenarios weren't theoretical. We designed, planned and executed exercises simulating exactly these types of threats. I've worked with national CBRN teams, coordinated cross-border responses and learned firsthand how these threats manifest in real-world scenarios.</p>
+
+                <p>My background includes managing projects under the CBRN risk mitigation portfolio and coordinating with Member States' specialized units. The technical knowledge? I've built it over years of practical implementation. The policy understanding? It comes from being in rooms where these decisions are made.</p>
+
+                <h3>Digital Transformation in Security</h3>
+                <p>One thing that caught my eye in the vacancy is FPI's focus on emerging technologies and digital solutions. At the Council, I led digital transformation initiatives that modernized our security and emergency response capabilities. We're talking about integrating building management systems, implementing comprehensive security infrastructures and leveraging technology to enhance safety protocols.</p>
+
+                <p>I also developed a ChatGPT course back in March 2023 when most people were still figuring out what AI meant. Why? Because I saw how technology could revolutionize how we work and I wanted to help others understand it too.</p>
+
+                <h3>From Romanian Fire Officer to EU Technical Project Manager</h3>
+                <p>My journey started in 2008 as an Installation Engineer and Fire Officer at the Alexandru Ioan Cuza Police Academy in Romania. From 2008 to 2015, I worked at the Romanian General Inspectorate for Emergency Situations, where I managed over 100 professional firefighters at the Parliament Palace and coordinated projects exceeding €100 million in value. This is where I learned crisis management isn't just about procedures; it's about people, pressure and split-second decisions that matter.</p>
+
+                <p>In 2013, I joined the European Commission's ERCC, coordinating responses to global emergencies like the Ebola Outbreak and Tropical Storm Yolanda. Since 2015, I've been at the Council of the EU, managing critical infrastructure and security projects while maintaining my role as Chief Exercise Controller for EU Modex exercises. This dual perspective gives me a unique understanding of both policy development and operational implementation.</p>
+            </section>
+
+            <section>
+                <h2>My Work in Action</h2>
+                <p>Rather than just telling you what I've done, let me show you:</p>
+
+                <div class="video-grid">
+                    <div class="video-card">
+                        <h4>Customer Learning Journey</h4>
+                        <a href="https://youtu.be/fBRUZmwj1qQ" target="_blank">Watch on YouTube →</a>
+                    </div>
+                    <div class="video-card">
+                        <h4>Full-Scale Exercise Coordinator</h4>
+                        <a href="https://youtu.be/RR3K1_AuA5c?t=278" target="_blank">Watch on YouTube →</a>
+                    </div>
+                    <div class="video-card">
+                        <h4>Presentation in France</h4>
+                        <a href="https://drive.google.com/file/d/1HFmcVD_y4uWwAIdW1w2lIdM0AA1WCVPa/view?usp=sharing" target="_blank">View Presentation →</a>
+                    </div>
+                    <div class="video-card">
+                        <h4>ChatGPT Course (March 2023)</h4>
+                        <a href="https://resilient.onlinecoursehost.com/courses/rozilient" target="_blank">View Course →</a>
+                    </div>
+                    <div class="video-card">
+                        <h4>Latest EU Modex in Bulgaria</h4>
+                        <a href="https://www.youtube.com/watch?v=S8UUss80TSs" target="_blank">Watch on YouTube →</a>
+                    </div>
+                    <div class="video-card">
+                        <h4>Rozilient Facebook Page</h4>
+                        <a href="https://www.facebook.com/rozilient" target="_blank">13k Followers →</a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Core Competencies</h2>
+                <div class="skills-list">
+                    <span class="skill-tag">17+ Years Experience</span>
+                    <span class="skill-tag">PM2 & Agile Methodologies</span>
+                    <span class="skill-tag">EU Financial Procedures</span>
+                    <span class="skill-tag">Contract Management</span>
+                    <span class="skill-tag">CBRN Risk Mitigation</span>
+                    <span class="skill-tag">Crisis Management</span>
+                    <span class="skill-tag">Stakeholder Coordination</span>
+                    <span class="skill-tag">Digital Transformation</span>
+                    <span class="skill-tag">Security Infrastructure</span>
+                    <span class="skill-tag">Multi-Agency Coordination</span>
+                    <span class="skill-tag">Strategic Planning</span>
+                    <span class="skill-tag">ITIL Certified</span>
+                    <span class="skill-tag">Cybersecurity (ISC²)</span>
+                </div>
+            </section>
+
+            <div class="passion-section">
+                <h3>Beyond the CV: Why I Care</h3>
+                <p>Here's something you won't find in most applications. I'm a UEFA B licensed football coach. For the past three years, I've been coaching youth teams at the highest level in Brussels (Iris Elite). Currently, I coach the U19 team at FC Stockel and we finished 4th place this season.</p>
+                
+                <p>Why does this matter? Because coaching taught me something crucial about leadership and project management that no course ever could. When you're managing a team of teenagers with different backgrounds, abilities and motivations and you need to turn them into a cohesive unit that performs under pressure, you learn what real leadership looks like. You learn to adapt your communication style, to motivate when things get tough and to celebrate collective success over individual glory.</p>
+                
+                <p>These same principles apply to managing complex, multi-stakeholder projects. Whether it's coordinating 37 countries in a civil protection exercise or bringing together different Commission DGs, EEAS and Member States for a CBRN project, it's about building trust, clear communication and shared purpose.</p>
+            </div>
+
+            <section>
+                <h2>What I've Learned About Large-Scale Coordination</h2>
+                <p>Over the years, I've written extensively about my experiences coordinating massive exercises and projects. Here are some insights I've shared:</p>
+
+                <div class="articles-section">
+                    <a href="https://www.linkedin.com/pulse/lesson-3-chief-exercise-controller-26-eu-modex-full-scale-simi-dolha-7niye" target="_blank" class="article-link">
+                        <strong>Lesson 3: Chief Exercise Controller on 26 EU Modex Full-Scale Exercises</strong><br>
+                        Insights from coordinating Europe's largest civil protection training events
+                    </a>
+
+                    <a href="https://www.linkedin.com/pulse/lesson-2-chief-exercise-controller-26-eu-modex-full-scale-simi-dolha-xkwme" target="_blank" class="article-link">
+                        <strong>Lesson 2: Chief Exercise Controller on 26 EU Modex Full-Scale Exercises</strong><br>
+                        What happens when you coordinate 700 people across 37 countries
+                    </a>
+
+                    <a href="https://www.linkedin.com/pulse/lesson-1-chief-exercise-controller-26-eu-modex-full-scale-simi-dolha-c2t9e" target="_blank" class="article-link">
+                        <strong>Lesson 1: Chief Exercise Controller on 26 EU Modex Full-Scale Exercises</strong><br>
+                        The beginning of a journey managing Europe's crisis response training
+                    </a>
+                </div>
+
+                <p>You can find more of my writing and professional updates on my <a href="https://www.linkedin.com/in/simi-dolha/" target="_blank" style="color: #595f39; font-weight: bold;">LinkedIn profile</a>.</p>
+            </section>
+
+            <section>
+                <h2>Why FPI.1? Why Now?</h2>
+                <p>I've spent my career preparing for moments that hopefully never come but when they do, lives depend on the quality of that preparation. Whether it's managing fire safety systems at the Council, coordinating disaster response exercises or working on CBRN scenarios, there's a common thread: security threats don't care about borders and effective responses require coordination, expertise and dedication.</p>
+
+                <p>FPI.1's work on multi-domain security, CBRN risk mitigation and capacity building aligns perfectly with what I've been doing and more importantly, with what I want to continue doing. The threats we face are evolving and someone needs to be in the room who understands both the technical complexity and the operational reality of implementing these programs.</p>
+
+                <p>I'm not looking for just another job. I'm looking for where my 17+ years of experience in crisis management, project coordination and security infrastructure can make the biggest impact. From everything I've learned about FPI.1, this is that place.</p>
+
+                <h3>What I'll Bring Day One</h3>
+                <p><strong>Operational Excellence:</strong> I know how to turn policy into action. I've managed the full project cycle from identification and formulation to implementation and closure. I understand EU financial and contractual procedures not from a textbook but from managing millions in contracts and navigating complex procurement processes.</p>
+
+                <p><strong>Stakeholder Management:</strong> I've coordinated with everyone from heads of civil protection to technical experts to ministers. I know how to build consensus, manage expectations and deliver results when multiple stakeholders have different priorities.</p>
+
+                <p><strong>Crisis Mindset:</strong> Working in emergency response and security, you develop a particular way of thinking. You plan for the worst, hope for the best and always have a contingency. This mindset is crucial for CBRN work where we're dealing with high-consequence, low-probability events.</p>
+
+                <p><strong>Team Spirit:</strong> The vacancy mentions FPI's collaborative culture and I can tell you from experience that the best results come from teams that trust each other. Whether it's leading a 24/7 security team at the Council or coordinating 400 staff members during an exercise, I've learned that success is always collective.</p>
+            </section>
+
+            <div class="highlight-box">
+                <h3>Languages & Communication</h3>
+                <p>English? Fluent (C2). French? Strong working knowledge (C1). Romanian? Native. But beyond language proficiency, I've learned to communicate complex technical information to diverse audiences, from writing briefings for senior management to explaining cybersecurity concepts to non-technical staff. Clear communication isn't just about speaking the language; it's about knowing your audience and adapting your message.</p>
+            </div>
+
+            <section>
+                <h2>The Bottom Line</h2>
+                <p>I could list more projects, more exercises, more certifications. But here's what really matters: I understand the mission. I've lived variations of this role for years. I know what it takes to manage complex security programs, coordinate multiple stakeholders and deliver results under pressure.</p>
+
+                <p>FPI needs someone who can hit the ground running, someone who understands both the policy environment and operational realities and someone who genuinely cares about making Europe safer. That's me.</p>
+
+                <p>I'm ready to bring my experience, energy and commitment to FPI.1. The threats we face are serious and the work you're doing is crucial. I want to be part of that effort.</p>
+
+                <p>Let's talk about how we can make this happen.</p>
+            </section>
+
+            <div class="contact-info">
+                <h3 style="margin-bottom: 20px; color: #E4E4DE;">Let's Connect</h3>
+                <p>
+                    <a href="mailto:simi@dolha.eu">simi@dolha.eu</a> |
+                    <a href="tel:+32476836829">+32 476 83 68 29</a> |
+                    <a href="https://www.linkedin.com/in/simi-dolha/" target="_blank">LinkedIn</a> |
+                    <a href="https://www.dolha.eu" target="_blank">www.dolha.eu</a>
+                </p>
+                <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.9;">Based in Brussels | EU SECRET Clearance Valid Until 2027</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

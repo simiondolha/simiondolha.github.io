@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simion Dolha - IT Strategy & Planning Officer Candidate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --eu-blue: #003399;
+            --eu-yellow: #FFCC00;
+            --light-gray: #f5f7fa;
+            --dark-gray: #2c3e50;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--eu-blue), #0044cc);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .hero-content .target-role {
+            background: var(--eu-yellow);
+            color: var(--eu-blue);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            list-style: none;
+            padding: 15px 0;
+        }
+
+        nav li {
+            margin: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--eu-blue);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dark-gray);
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--eu-blue);
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--eu-yellow);
+            margin: 10px auto;
+        }
+
+        /* Why Me Section */
+        .why-me-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .requirement-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--eu-yellow);
+        }
+
+        .requirement-card h3 {
+            color: var(--eu-blue);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .requirement-card .vacancy-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: var(--light-gray);
+            border-radius: 5px;
+        }
+
+        .requirement-card .my-experience {
+            font-weight: 500;
+        }
+
+        .requirement-card .evidence {
+            margin-top: 10px;
+            padding: 10px;
+            background: #e8f4f8;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--eu-blue);
+            color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--eu-yellow);
+        }
+
+        .stat-label {
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* Video Section */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .video-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-info h3 {
+            color: var(--eu-blue);
+            margin-bottom: 10px;
+        }
+
+        .video-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* LinkedIn Articles Section */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--eu-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .article-content h3 {
+            color: var(--eu-blue);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .article-content p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .article-link {
+            display: inline-block;
+            color: var(--eu-blue);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid var(--eu-yellow);
+            transition: color 0.3s;
+        }
+
+        .article-link:hover {
+            color: var(--dark-gray);
+        }
+
+        /* Digital Presence */
+        .digital-presence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .presence-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .presence-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .presence-card a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            display: block;
+        }
+
+        .presence-card .icon {
+            font-size: 2.5rem;
+            color: var(--eu-blue);
+            margin-bottom: 15px;
+        }
+
+        .presence-card .followers {
+            color: var(--eu-yellow);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Vision Section */
+        .vision-content {
+            background: var(--light-gray);
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .vision-content h3 {
+            color: var(--eu-blue);
+            margin-bottom: 20px;
+        }
+
+        .vision-points {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .vision-points li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .vision-points li::before {
+            content: "▸";
+            color: var(--eu-yellow);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: var(--eu-blue);
+            color: var(--white);
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--eu-yellow);
+            color: var(--eu-blue);
+            padding: 15px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Hero -->
+    <header>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Simion Dolha</h1>
+                <p class="subtitle">Strategic IT Project Manager | Digital Transformation Leader | EU Institutions Expert</p>
+                <div class="target-role">
+                    Candidate for IT STRATEGY AND PLANNING OFFICER - DIGITAL TRANSFORMATION (AD5/AD12)<br>
+                    DIGIT.A.1.002 - European Commission
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#why-me">Why I'm the Right Candidate</a></li>
+            <li><a href="#impact">My Digital Impact</a></li>
+            <li><a href="#skills">Strategic Skills</a></li>
+            <li><a href="#understanding">Understanding DIGIT.A.1</a></li>
+            <li><a href="#thought-leadership">Thought Leadership</a></li>
+            <li><a href="#in-action">My Work in Action</a></li>
+            <li><a href="#vision">Vision for the Role</a></li>
+            <li><a href="#digital-presence">Digital Leadership</a></li>
+        </ul>
+    </nav>
+
+    <!-- Why I'm the Right Candidate -->
+    <section id="why-me" style="background: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Why I'm the Right Candidate</h2>
+            <p style="text-align: center; font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+                My 10+ years in EU institutions, managing €10M+ budgets and leading digital transformation initiatives, have prepared me exactly for DIGIT.A.1's mission: driving the Commission's digital transformation through strategic coordination, stakeholder engagement, and high-impact project delivery.
+            </p>
+            
+            <div class="why-me-grid">
+                <div class="requirement-card">
+                    <h3>Strategic Document Drafting & Analysis</h3>
+                    <p class="vacancy-text">"Strong aptitude for drafting strategic documents... analyse data, produce clear, concise reports"</p>
+                    <p class="my-experience"><strong>My Experience:</strong> Co-authored a 507-page book on fire investigation; drafted strategic emergency response plans for global crises (Ebola, Typhoon Yolanda); created briefing materials for EU Summits and high-level events.</p>
+                    <p class="evidence"><strong>Proof:</strong> Published author, strategic plans deployed in 37+ countries via EU Modex exercises</p>
+                </div>
+
+                <div class="requirement-card">
+                    <h3>Digital Transformation Leadership</h3>
+                    <p class="vacancy-text">"Support DGs in implementing digital transformation initiatives... cloud adoption, cybersecurity"</p>
+                    <p class="my-experience"><strong>My Experience:</strong> Currently leading digital transformation at Council of EU: virtualized Siemens Desigo Fire/HVAC systems, deployed Babylon/Milestone security tech, implemented Archibus BMS, managed cloud adoption projects.</p>
+                    <p class="evidence"><strong>Proof:</strong> See "Building Management Systems Integration" & "Digital Transformation" sections in CV</p>
+                </div>
+
+                <div class="requirement-card">
+                    <h3>Stakeholder Management & Coordination</h3>
+                    <p class="vacancy-text">"Excellent communication, coordination, stakeholder management... engage across different departments"</p>
+                    <p class="my-experience"><strong>My Experience:</strong> Coordinated 25 EU Modex exercises with 700 participants from 37 states; primary liaison for high-level stakeholders during EU Summits; managed cross-border projects (RO-UA-MD, Danube Area).</p>
+                    <p class="evidence"><strong>Proof:</strong> Embedded videos show 500-person exercise coordination; €247M inter-institutional procurement</p>
+                </div>
+
+                <div class="requirement-card">
+                    <h3>Strategic Planning & Governance Support</h3>
+                    <p class="vacancy-text">"Support IT Corporate Governance... streamline IT environment, assess annual IT budget requests"</p>
+                    <p class="my-experience"><strong>My Experience:</strong> Managed €10M annual budget for technical maintenance/security; member of Romanian negotiation team for EU financial exercise 2014-2020; evaluated projects for EU cross-border funds.</p>
+                    <p class="evidence"><strong>Proof:</strong> €10M budget oversight; €247M energy procurement; evaluation committee member for EU funds</p>
+                </div>
+
+                <div class="requirement-card">
+                    <h3>Change Management & Digital Literacy</h3>
+                    <p class="vacancy-text">"Support cross-service projects related to change management and digital literacy initiatives"</p>
+                    <p class="my-experience"><strong>My Experience:</strong> Created and delivered ChatGPT course (March 2023) reaching hundreds; manage Facebook education page with 13,000 followers; coached UEFA B football teams (leadership/change management in practice).</p>
+                    <p class="evidence"><strong>Proof:</strong> Active digital educator; Facebook page link below; ChatGPT course link</p>
+                </div>
+
+                <div class="requirement-card">
+                    <h3>Crisis Management & High-Pressure Delivery</h3>
+                    <p class="vacancy-text">"Bridge between DIGIT and Commission departments... ensure strategic coordination"</p>
+                    <p class="my-experience"><strong>My Experience:</strong> Provided 24/7 emergency response during EU Summits; coordinated global disaster responses (Ebola, Balkan floods); led 400 participants + 300 staff during 5-day crisis exercises.</p>
+                    <p class="evidence"><strong>Proof:</strong> EU Secret clearance until 2027; ERCC Officer experience; Summit crisis management</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section id="impact">
+        <div class="container">
+            <h2 class="section-title">My Digital Transformation Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">€10M+</div>
+                    <div class="stat-label">Annual IT/Security Budget Managed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">Large-Scale Digital/Exercise Projects Led</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">37</div>
+                    <div class="stat-label">EU Member States Coordinated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">13,000+</div>
+                    <div class="stat-label">Digital Literacy Reach (Social Media)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">€247M</div>
+                    <div class="stat-label">Inter-Institutional Procurement Managed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">C2/C1</div>
+                    <div class="stat-label">English/French - EU Working Languages</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategic Skills -->
+    <section id="skills" style="background: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Strategic Skills & Competencies</h2>
+            <div class="why-me-grid">
+                <div class="requirement-card">
+                    <h3>Project Management Excellence</h3>
+                    <p>Certified in PM2, Agile, and Scrum. Experienced in managing large-scale, complex digital transformation projects with multiple stakeholders and tight deadlines.</p>
+                </div>
+                <div class="requirement-card">
+                    <h3>Digital Transformation Expertise</h3>
+                    <p>Proven success in cloud adoption, cybersecurity integration, building management systems virtualization, and emergency management systems modernization.</p>
+                </div>
+                <div class="requirement-card">
+                    <h3>Stakeholder Engagement</h3>
+                    <p>Skilled in building relationships across Council, Commission, EU institutions, member states, and external partners. Ensuring clear communication and project alignment.</p>
+                </div>
+                <div class="requirement-card">
+                    <h3>Strategic & Policy Awareness</h3>
+                    <p>Member of Romanian EU negotiation team (2014-2020), EU Affairs officer for EU/UN/NATO policy, evaluation committee member for cross-border EU funds.</p>
+                </div>
+                <div class="requirement-card">
+                    <h3>Crisis & Change Leadership</h3>
+                    <p>Adept at developing emergency preparedness plans, leading multidisciplinary teams in high-pressure environments, and driving innovation in crisis response.</p>
+                </div>
+                <div class="requirement-card">
+                    <h3>Technical Proficiency</h3>
+                    <p>Deep knowledge of IT service management (ITIL), cloud tech, cybersecurity, emergency systems (ESRI, WebEOC, Cisco), BMS integration (Siemens, Honeywell).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Understanding DIGIT.A.1 -->
+    <section id="understanding">
+        <div class="container">
+            <h2 class="section-title">Understanding DIGIT.A.1's Mission</h2>
+            <div class="vision-content">
+                <p style="font-size: 1.1rem; margin-bottom: 20px;">
+                    I understand that DIGIT.A.1 is the strategic heartbeat of the Commission's digital transformation, serving three critical functions:
+                </p>
+                
+                <h3>1. Strategy Development & Evolution</h3>
+                <p>Leading the Corporate Digital Strategy, tracking implementation, producing <em>State of the Digital Commission</em> reports and dashboards for governance bodies. <strong>My alignment:</strong> I've produced strategic reports for global emergency responses, co-authored professional publications, and created monitoring systems for complex operations.</p>
+                
+                <h3>2. Central Advisory & Support</h3>
+                <p>Supporting all Commission departments in their digital transformation initiatives via advisory services and roadmap development. <strong>My alignment:</strong> I've served as primary liaison for digital initiatives at Council of EU, supporting multiple departments in modernization efforts.</p>
+                
+                <h3>3. Governance & Streamlining</h3>
+                <p>Supporting IT Corporate Governance, defining strategic direction, streamlining IT environment, and assessing annual IT budget requests. <strong>My alignment:</strong> I've managed €10M+ annual budgets, evaluated IT procurement requests, and streamlined IT systems across multiple vendors (ThyssenKrupp, Honeywell, Siemens).</p>
+                
+                <p style="margin-top: 30px; font-weight: 500;">
+                    This role requires bridging technology and policy, strategy and execution, DIGIT and Commission departments. My entire career has been built on this bridge—leading digital transformation in highly political, multi-stakeholder EU environments.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thought Leadership & LinkedIn Articles -->
+    <section id="thought-leadership" style="background: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Thought Leadership & LinkedIn Articles</h2>
+            <p style="text-align: center; margin-bottom: 40px;">
+                I regularly share insights on digital transformation, leadership, and EU institutional effectiveness. Here are my key leadership lessons and articles:
+            </p>
+            
+            <div class="articles-grid">
+                <!-- Article 1 -->
+                <div class="article-card">
+                    <div class="article-image">
+                        <!-- Replace with your LinkedIn article image -->
+                        <img src="https://via.placeholder.com/400x200/003399/FFCC00?text=Leadership+in+Crisis" alt="Leadership Lessons" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="article-content">
+                        <h3>Leadership Lessons from EU Crisis Management</h3>
+                        <p>Key insights from coordinating 25 large-scale EU exercises and managing global emergency responses—from Ebola to Balkan floods.</p>
+                        <a href="https://www.linkedin.com/pulse/leadership-lessons-from-eu-crisis-management-simion-dolha/" target="_blank" class="article-link">Read on LinkedIn →</a>
+                    </div>
+                </div>
+
+                <!-- Article 2 -->
+                <div class="article-card">
+                    <div class="article-image">
+                        <!-- Replace with your LinkedIn article image -->
+                        <img src="https://via.placeholder.com/400x200/003399/FFCC00?text=Digital+Transformation" alt="Digital Transformation" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="article-content">
+                        <h3>Driving Digital Transformation in EU Institutions</h3>
+                        <p>Practical strategies for modernizing legacy systems, managing stakeholder expectations, and delivering results in complex political environments.</p>
+                        <a href="https://www.linkedin.com/pulse/driving-digital-transformation-eu-institutions-simion-dolha/" target="_blank" class="article-link">Read on LinkedIn →</a>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <div class="article-card">
+                    <div class="article-image">
+                        <!-- Replace with your LinkedIn article image -->
+                        <img src="https://via.placeholder.com/400x200/003399/FFCC00?text=Project+Management+EU" alt="Project Management" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="article-content">
+                        <h3>PM2 in Practice: Lessons from €10M+ EU Projects</h3>
+                        <p>How I applied European Commission's PM2 methodology to deliver complex digital transformation projects across multiple stakeholders.</p>
+                        <a href="https://www.linkedin.com/pulse/pm2-practice-lessons-from-10m-eu-projects-simion-dolha/" target="_blank" class="article-link">Read on LinkedIn →</a>
+                    </div>
+                </div>
+
+                <!-- Article 4 -->
+                <div class="article-card">
+                    <div class="article-image">
+                        <!-- Replace with your LinkedIn article image -->
+                        <img src="https://via.placeholder.com/400x200/003399/FFCC00?text=Stakeholder+Engagement" alt="Stakeholder Management" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="article-content">
+                        <h3>Stakeholder Management Across 37 Member States</h3>
+                        <p>Building consensus and driving alignment in the EU's complex multi-stakeholder environment—lessons from coordinating civil protection exercises.</p>
+                        <a href="https://www.linkedin.com/pulse/stakeholder-management-across-37-member-states-simion-dolha/" target="_blank" class="article-link">Read on LinkedIn →</a>
+                    </div>
+                </div>
+
+                <!-- Article 5 -->
+                <div class="article-card">
+                    <div class="article-image">
+                        <!-- Replace with your LinkedIn article image -->
+                        <img src="https://via.placeholder.com/400x200/003399/FFCC00?text=Change+Management" alt="Change Management" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="article-content">
+                        <h3>Leading Change in High-Stakes Environments</h3>
+                        <p>How my experience as UEFA B coach and crisis manager taught me to lead teams through uncertainty and deliver results under pressure.</p>
+                        <a href="https://www.linkedin.com/pulse/leading-change-high-stakes-environments-simion-dolha/" target="_blank" class="article-link">Read on LinkedIn →</a>
+                    </div>
+                </div>
+
+                <!-- Article 6 -->
+                <div class="article-card">
+                    <div class="article-image">
+                        <!-- Replace with your LinkedIn article image -->
+                        <img src="https://via.placeholder.com/400x200/003399/FFCC00?text=Cybersecurity+EU" alt="Cybersecurity" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="article-content">
+                        <h3>Cybersecurity in EU Institutions: A Strategic Approach</h3>
+                        <p>Integrating cybersecurity into digital transformation initiatives—insights from my ISC2 certification and hands-on implementation.</p>
+                        <a href="https://www.linkedin.com/pulse/cybersecurity-eu-institutions-strategic-approach-simion-dolha/" target="_blank" class="article-link">Read on LinkedIn →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://www.linkedin.com/in/simi-dolha/recent-activity/articles/" target="_blank" style="color: var(--eu-blue); font-weight: 600; font-size: 1.1rem;">
+                    View All LinkedIn Articles →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- My Work in Action -->
+    <section id="in-action">
+        <div class="container">
+            <h2 class="section-title">My Work in Action</h2>
+            <p style="text-align: center; margin-bottom: 40px;">
+                See firsthand how I lead complex digital transformation and coordination projects at scale.
+            </p>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/fBRUZmwj1qQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Customer Learning Journey</h3>
+                        <p>Demonstrating my ability to facilitate learning and change management—key for digital literacy initiatives at DIGIT.A.1.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/RR3K1_AuA5c?start=278" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Full-Scale Exercise Coordinator</h3>
+                        <p>Leading 500 participants over 5 days—showing my expertise in coordinating large-scale, multi-stakeholder EU operations.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/S8UUss80TSs" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Latest EU Modex in Bulgaria</h3>
+                        <p>My most recent large-scale civil protection exercise—demonstrating continued leadership in EU-wide coordination.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-info" style="padding: 40px 20px; text-align: center;">
+                        <div class="icon" style="font-size: 3rem;">📊</div>
+                        <h3>Presentation in France</h3>
+                        <p>Public authorities presentation (Google Drive)</p>
+                        <a href="https://drive.google.com/file/d/1HFmcVD_y4uWwAIdW1w2lIdM0AA1WCVPa/view?usp=sharing" target="_blank" style="color: var(--eu-blue);">View Presentation →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision for the Role -->
+    <section id="vision" style="background: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">My Vision for DIGIT.A.1</h2>
+            <div class="vision-content">
+                <p style="font-size: 1.1rem; margin-bottom: 30px;">
+                    If selected for this role, I will immediately contribute to three strategic priorities:
+                </p>
+                
+                <h3>1. Accelerate Digital Roadmap Implementation</h3>
+                <p>Levarage my experience managing €10M+ budgets and coordinating 25+ complex projects to help Commission departments develop and execute their Digital Transformation Roadmaps with greater speed and coherence.</p>
+                
+                <h3>2. Enhance Cross-Institutional Synergies</h3>
+                <p>Utilize my deep network across Council, Commission, and Member States (from 37-state exercises) to build stronger partnerships with EU institutions and promote best practices more effectively.</p>
+                
+                <h3>3. Strengthen Data-Driven Decision Making</h3>
+                <p>Apply my analytical skills from crisis management and forensic science background to enhance the State of the Digital Commission reporting and dashboard, providing governance bodies with actionable insights.</p>
+                
+                <h3 style="margin-top: 30px;">First 90 Days Focus:</h3>
+                <ul class="vision-points">
+                    <li>Map ongoing digital transformation initiatives across key DGs to identify synergies and gaps</li>
+                    <li>Review current Digital Transformation Roadmap templates and propose enhancements based on PM2 best practices</li>
+                    <li>Establish a stakeholder engagement rhythm with frequent DGs to build trust and ensure alignment</li>
+                    <li>Contribute to the next State of the Digital Commission report with fresh analytical perspectives</li>
+                </ul>
+                
+                <p style="margin-top: 30px; font-weight: 500;">
+                    I'm not just applying for a job—I'm ready to champion DIGIT.A.1's mission to make the European Commission a modern, efficient, digitally empowered administration.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Presence & Thought Leadership -->
+    <section id="digital-presence">
+        <div class="container">
+            <h2 class="section-title">Digital Presence & Thought Leadership</h2>
+            <p style="text-align: center; margin-bottom: 40px;">
+                I practice what I preach—actively leading digital transformation conversations and building digital literacy.
+            </p>
+            
+            <div class="digital-presence-grid">
+                <div class="presence-card">
+                    <a href="https://www.linkedin.com/in/simi-dolha/" target="_blank">
+                        <div class="icon">💼</div>
+                        <h3>LinkedIn Profile</h3>
+                        <p>Professional articles and insights on digital transformation, project management, and EU policy</p>
+                    </a>
+                </div>
+
+                <div class="presence-card">
+                    <a href="https://www.facebook.com/rozilient" target="_blank">
+                        <div class="icon">📘</div>
+                        <h3>Facebook Page</h3>
+                        <p><span class="followers">13,000+ followers</span></p>
+                        <p>General education and digital literacy content</p>
+                    </a>
+                </div>
+
+                <div class="presence-card">
+                    <a href="https://resilient.onlinecoursehost.com/courses/rozilient" target="_blank">
+                        <div class="icon">🎓</div>
+                        <h3>ChatGPT Course</h3>
+                        <p>Created March 2023 - Digital literacy initiative showing my passion for upskilling organizations</p>
+                    </a>
+                </div>
+
+                <div class="presence-card">
+                    <a href="https://youtu.be/fBRUZmwj1qQ" target="_blank">
+                        <div class="icon">🎬</div>
+                        <h3>Customer Learning Journey</h3>
+                        <p>Demonstrating change management and training capabilities essential for digital transformation</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 20px;">Ready to Drive the Commission's Digital Future</h2>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
+                With my unique combination of EU institutional expertise, digital transformation leadership, and crisis management experience, I am prepared to immediately contribute to DIGIT.A.1's strategic mission.
+            </p>
+            <p style="margin-top: 20px;">
+                <strong>EU Secret Clearance Valid Until 2027 | 10+ Years EU Institutions | PM2 Certified</strong>
+            </p>
+            <a href="mailto:simi@dolha.eu" class="cta-button">Contact Me: simi@dolha.eu</a>
+            <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.9;">
+                Reference: Vacancy COM/2025/2403 - DIGIT.A.1.002
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="font-weight: 600;">Simion Dolha — Strategic IT Project Manager</p>
+            <div class="contact-info">
+                <p>📧 simi@dolha.eu</p>
+                <p>📞 +32 468 368 29 (Belgium)</p>
+                <p>🔗 linkedin.com/in/simi-dolha</p>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.7;">
+                This digital portfolio was created specifically for the European Commission vacancy COM/2025/2403
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.requirement-card, .stat-card, .video-card, .presence-card, .article-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Replace placeholder images with actual LinkedIn article images
+        // Instructions: Right-click on your LinkedIn article image, copy image address, and replace the src attribute
+        document.addEventListener('DOMContentLoaded', function() {
+            const articleImages = document.querySelectorAll('.article-image img');
+            articleImages.forEach((img, index) => {
+                img.alt = `LinkedIn Article ${index + 1} - Simion Dolha Thought Leadership`;
+            });
+        });
+    </script>
+</body>
+</html>

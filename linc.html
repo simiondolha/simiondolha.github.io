@@ -65,8 +65,15 @@
             .prose {
                 max-width: none;
             }
-            /* Ensure SVGs don't print */
-            svg {
+            /* Ensure SVGs print (if they are part of the report) */
+            #report-view svg {
+                display: inline-block; /* Make sure logo prints */
+            }
+            #report-view img {
+                display: block; /* Make sure logo prints */
+            }
+            /* Hide decorative SVGs on dashboard */
+            #dashboard-view svg {
                 display: none;
             }
             /* Make links look like text */
@@ -76,10 +83,10 @@
             }
             /* Ensure the header and footers print properly */
             #report-view header {
-                border-bottom: 2px solid #000;
+                border-bottom: 2px solid #000 !important;
             }
             #report-view footer {
-                border-top: 1px solid #000;
+                border-top: 1px solid #000 !important;
             }
         }
     </style>
@@ -90,12 +97,27 @@
     <!-- * DASHBOARD VIEW (STARTS ON)        * -->
     <!-- ********************************************** -->
     <div id="dashboard-view" class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
-        <header class="bg-blue-900 text-white p-6">
-            <h1 class="text-2xl md:text-3xl font-bold">Strategic Resilience Dashboard</h1>
-            <p class="mt-1 text-blue-200">An Innovative Mindset Applied to DG LINC Challenges</p>
+        
+        <!-- NEW PROFESSIONAL HEADER -->
+        <header class="bg-blue-900 text-white p-6 flex items-center space-x-6">
+            <!-- 1. EP Logo (White) - UPDATED URL -->
+            <img src="https://www.logo.wine/a/logo/European_Parliament/European_Parliament-Logo.wine-white.svg" alt="European Parliament Logo" class="h-20 w-auto flex-shrink-0">
+            
+            <!-- 2. Titles -->
+            <div>
+                <!-- This is THEIR unit -->
+                <h1 class="text-xl md:text-2xl font-bold">Directorate-General for Logistics and Interpretation for Conferences (DG LINC)</h1>
+                <!-- This is THEIR specific unit -->
+                <p class="mt-1 text-blue-200 text-lg">
+                    Strategy and Innovation Unit
+                </p>
+            </div>
         </header>
 
         <div class="p-6 md:p-8">
+            <!-- NEW Tool Title -->
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Demo: Strategic Resilience Dashboard</h2>
+
             <!-- STEP 1: The Challenge -->
             <div class="mb-6">
                 <label for="scenario" class="block text-sm font-medium text-gray-700 mb-2">1. Enter a DG LINC Challenge:</label>
@@ -163,14 +185,6 @@ A high-level inter-institutional conference (managed by DG LINC) is scheduled to
             <div id="error" class="mt-8 p-4 bg-red-100 text-red-700 border border-red-300 rounded-lg" style="display: none;">
                 <!-- Error message will be inserted here -->
             </div>
-
-            <!-- STEP 4: The Output (Original Output Div, now unused) -->
-            <div id="output" class="mt-8 pt-6 border-t border-gray-200" style="display: none;">
-                <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Strategic Analysis & Recommendations</h2>
-                <div id="output-content" class="prose prose-blue max-w-none text-gray-800">
-                    <!-- Content will be injected by JavaScript -->
-                </div>
-            </div>
         </div>
     </div>
 
@@ -179,9 +193,25 @@ A high-level inter-institutional conference (managed by DG LINC) is scheduled to
     <!-- ********************************************** -->
     <div id="report-view" class="max-w-4xl mx-auto bg-white" style="display: none;">
         <div class="p-8 md:p-12">
-            <header class="mb-8 pb-4 border-b border-gray-300">
-                <h1 class="text-3xl font-bold text-gray-900">Strategic Resilience Analysis</h1>
-                <p class="mt-1 text-gray-600">Generated for DG LINC Challenge | Simion Dolha</p>
+            
+            <!-- NEW PROFESSIONAL REPORT HEADER -->
+            <header class="mb-8 pb-4 border-b-2 border-gray-500">
+                <div class="flex items-start justify-between">
+                    <!-- 1. Official Titles -->
+                    <div class="text-gray-800">
+                        <h2 class="text-xl font-bold uppercase text-blue-900">European Parliament</h2>
+                        <h3 class="text-lg">Directorate-General for Logistics and Interpretation for Conferences (DG LINC)</h3>
+                        <h4 class="text-lg font-semibold">Strategy and Innovation Unit</h4>
+                    </div>
+                    <!-- 2. EP Logo (Color) - UPDATED URL -->
+                    <img src="https://www.logo.wine/a/logo/European_Parliament/European_Parliament-Logo.wine.svg" alt="European Parliament Logo" class="h-24 w-auto">
+                </div>
+                
+                <!-- 3. Report Title -->
+                <h1 class="text-3xl font-bold text-gray-900 mt-8">Strategic Resilience Analysis</h1>
+                <p class="mt-1 text-gray-600">
+                    <strong>Generated by:</strong> Simion Dolha (Candidate, Administrative Manager)
+                </p>
             </header>
 
             <section id="report-scenario-section" class="mb-8">
@@ -234,9 +264,9 @@ A high-level inter-institutional conference (managed by DG LINC) is scheduled to
         // 1. Go to https://aistudio.google.com/app/apikey
         // 2. Create an API key and paste it below.
         // NOTE: This is safe for a local demo. DO NOT upload this file with your key to a public website.
-        const API_KEY = "AIzaSyCi4mRYbN1FtCZR2Wd0lHWaP8CSWEeWiE82"; // <--- PASTE YOUR KEY HERE
+        const API_KEY = "YOUR_GEMINI_API_KEY_GOES_HERE"; // <--- PASTE YOUR KEY HERE
         
-        const MODEL_NAME = "gemini-2.5-pro";
+        const MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`;
 
         // This is the "engine" of your methodology, now built directly into the file.
@@ -253,7 +283,7 @@ Your role is to analyze a given administrative or logistical challenge for a hig
 1.  **Immediate Action Plan (Tactical):** 3-4 critical, numbered steps to stabilize the situation.
 2.  **Risk Analysis (The Dolha Method):**
     * **Information Paradox:** [Concisely identify the missing data point]
-    * **Babel Effect:** [Concisely identify the key communication breakdown]
+    * **Babel Effect:** [Concisibly identify the key communication breakdown]
     * **Coordination Tax:** [Concisely identify the cascading failure]
 3.  **Key Stakeholder Communication:** A brief communication plan (internal & external).
 4.  **Business Continuity Gaps Exposed:** What systemic vulnerability does this event reveal?
@@ -296,7 +326,7 @@ Your tone is calm, authoritative, and solutions-oriented. Format your response w
             }
 
             // Check if API key is pasted
-            if (API_KEY === "YOUR_GEMINI_API_KEY_GOES_HERE") {
+            if (API_KEY === "AIzaSyCi4mRYbN1FtCZR2Wd0lHWaP8CSWEeWiE8") {
                 showError("Analysis failed: API_KEY is missing. Please paste your Gemini API key into the index.html file.");
                 return;
             }

@@ -13,6 +13,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* bg-gray-100 */
         }
         /* Simple spinner */
         .spinner {
@@ -27,10 +28,68 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+                background-color: #ffffff; /* White background for print */
+            }
+            /* Hide dashboard, main footer, and report buttons */
+            #dashboard-view, #report-buttons, body > footer {
+                display: none !important;
+            }
+            /* Show only the report view */
+            #report-view {
+                display: block !important;
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+            /* Ensure all text is black for printing */
+            .text-gray-700, .text-gray-600, .text-gray-800, .text-gray-900, .text-blue-900 {
+                color: #000000 !important;
+            }
+            /* Remove background colors and add simple border */
+            .bg-gray-100, .bg-blue-50 {
+                background-color: transparent !important;
+                border: 1px solid #cccccc;
+            }
+            .prose {
+                max-width: none;
+            }
+            /* Ensure SVGs don't print */
+            svg {
+                display: none;
+            }
+            /* Make links look like text */
+            a {
+                text-decoration: none;
+                color: #000000;
+            }
+            /* Ensure the header and footers print properly */
+            #report-view header {
+                border-bottom: 2px solid #000;
+            }
+            #report-view footer {
+                border-top: 1px solid #000;
+            }
+        }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen p-4 md:p-8">
-    <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+<body class="p-4 md:p-8">
+    
+    <!-- ********************************************** -->
+    <!-- * DASHBOARD VIEW (STARTS ON)        * -->
+    <!-- ********************************************** -->
+    <div id="dashboard-view" class="max-w-4xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         <header class="bg-blue-900 text-white p-6">
             <h1 class="text-2xl md:text-3xl font-bold">Strategic Resilience Dashboard</h1>
             <p class="mt-1 text-blue-200">An Innovative Mindset Applied to DG LINC Challenges</p>
@@ -41,15 +100,15 @@
             <div class="mb-6">
                 <label for="scenario" class="block text-sm font-medium text-gray-700 mb-2">1. Enter a DG LINC Challenge:</label>
                 <textarea id="scenario" rows="8" class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm">
-A no-notice strike by airport staff in Strasbourg is declared 48 hours before a plenary session.
+It's 7 AM on Thursday, Feb 1, 2024. Over 1,000 tractors are blockading Place du Luxembourg and all main roads to the Parliament in Brussels.
 
-Simultaneously, a key interpreter team is stuck on a failed train from Brussels, and their equipment is with them.
+Fires are being lit, and security reports the situation is 'tense.' An EU Leaders' Summit is happening nearby.
 
-A high-priority diplomatic delegation is scheduled to arrive at the blocked airport and will miss their pre-session meetings.
+A high-level inter-institutional conference (managed by DG LINC) is scheduled to begin in 2 hours, and all 300 delegates, speakers, and interpreter teams are blocked from accessing the building.
 </textarea>
             </div>
             
-            <!-- STEP 2: The Methodology (NEWLY ADDED SECTION) -->
+            <!-- STEP 2: The Methodology -->
             <div class="mb-6">
                 <h2 class="text-base font-medium text-gray-700 mb-3">2. The Dolha Strategic Framework (The "Engine")</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -105,7 +164,7 @@ A high-priority diplomatic delegation is scheduled to arrive at the blocked airp
                 <!-- Error message will be inserted here -->
             </div>
 
-            <!-- STEP 4: The Output -->
+            <!-- STEP 4: The Output (Original Output Div, now unused) -->
             <div id="output" class="mt-8 pt-6 border-t border-gray-200" style="display: none;">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4">4. Strategic Analysis & Recommendations</h2>
                 <div id="output-content" class="prose prose-blue max-w-none text-gray-800">
@@ -115,18 +174,72 @@ A high-priority diplomatic delegation is scheduled to arrive at the blocked airp
         </div>
     </div>
 
+    <!-- ********************************************** -->
+    <!-- * PRINT REPORT VIEW (STARTS HIDDEN)     * -->
+    <!-- ********************************************** -->
+    <div id="report-view" class="max-w-4xl mx-auto bg-white" style="display: none;">
+        <div class="p-8 md:p-12">
+            <header class="mb-8 pb-4 border-b border-gray-300">
+                <h1 class="text-3xl font-bold text-gray-900">Strategic Resilience Analysis</h1>
+                <p class="mt-1 text-gray-600">Generated for DG LINC Challenge | Simion Dolha</p>
+            </header>
+
+            <section id="report-scenario-section" class="mb-8">
+                <h2 class="text-xl font-semibold text-gray-800 mb-3">1. Challenge / Scenario</h2>
+                <div id="report-scenario" class="p-4 bg-gray-100 border border-gray-300 rounded-lg text-gray-700 whitespace-pre-wrap">
+                    <!-- Scenario text injected here -->
+                </div>
+            </section>
+
+            <section id="report-analysis-section">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">2. Strategic Analysis & Recommendations</h2>
+                <div id="report-content" class="prose prose-blue max-w-none text-gray-800">
+                    <!-- Analysis HTML injected here -->
+                </div>
+            </section>
+
+            <footer class="mt-12 pt-4 border-t border-gray-300 text-center text-gray-500 text-sm">
+                Analysis generated using the Simion Dolha "Rozilient" Framework.
+            </footer>
+        </div>
+
+        <!-- Print/Back buttons (hidden on print) -->
+        <div id="report-buttons" class="mt-8 mb-8 flex justify-center gap-4">
+            <button id="backButton" class="bg-gray-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-700 transition duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+                </svg>
+                Back to Dashboard
+            </button>
+            <button id="printButton" class="bg-blue-700 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-800 transition duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h-1a1 1 0 00-1 1v2a1 1 0 001 1h1a1 1 0 001-1v-2a1 1 0 00-1-1zM6 17H5a1 1 0 00-1 1v2a1 1 0 001 1h1a1 1 0 001-1v-2a1 1 0 00-1-1z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2zM7 7h10M7 11h10M7 15h10" />
+                </svg>
+                Print Report
+            </button>
+        </div>
+    </div>
+
+
     <footer class="text-center text-gray-500 text-sm mt-8">
         Demo utilizing the Gemini API, trained with the "Rozilient / Dolha" strategic methodology.
     </footer>
 
-    <script type_model="module">
+    <script type="module">
         // --- Gemini API Configuration ---
-        const API_KEY = ""; // Leave as ""
-        const MODEL_NAME = "gemini-2.5-flash-preview-09-2025";
+        // ALL LOGIC IS NOW IN THIS ONE FILE.
+        
+        // --- ACTION REQUIRED ---
+        // 1. Go to https://aistudio.google.com/app/apikey
+        // 2. Create an API key and paste it below.
+        // NOTE: This is safe for a local demo. DO NOT upload this file with your key to a public website.
+        const API_KEY = "AIzaSyCi4mRYbN1FtCZR2Wd0lHWaP8CSWEeWiE8"; // <--- PASTE YOUR KEY HERE
+        
+        const MODEL_NAME = "gemini-2.5-pro";
         const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${API_KEY}`;
 
-        // THIS IS THE "ENGINE" - HOW THE PRINCIPLES ARE CODED
-        // This system prompt instructs the AI to use your specific methodology.
+        // This is the "engine" of your methodology, now built directly into the file.
         const SYSTEM_PROMPT = `
 You are a world-class strategic advisor synthesizing the crisis management methodologies of Simion Dolha. Your analysis is based on his core 'Proprietary Dataset' principles derived from 25+ EU Modex exercises:
 
@@ -147,18 +260,30 @@ Your role is to analyze a given administrative or logistical challenge for a hig
 5.  **Long-Term Strategic Recommendation:** What process, internal control, or project should be initiated to prevent this?
 
 Your tone is calm, authoritative, and solutions-oriented. Format your response with clear headings for each of the 5 parts.
-        `;
+`;
 
         // --- DOM Elements ---
         const analyzeButton = document.getElementById('analyzeButton');
         const scenarioInput = document.getElementById('scenario');
         const loadingDiv = document.getElementById('loading');
-        const outputDiv = document.getElementById('output');
-        const outputContent = document.getElementById('output-content');
         const errorDiv = document.getElementById('error');
 
-        // --- Event Listener ---
+        // Dashboard View Elements
+        const dashboardView = document.getElementById('dashboard-view');
+        const mainFooter = document.querySelector('body > footer');
+
+        // Report View Elements
+        const reportView = document.getElementById('report-view');
+        const reportScenario = document.getElementById('report-scenario');
+        const reportContent = document.getElementById('report-content');
+        const printButton = document.getElementById('printButton');
+        const backButton = document.getElementById('backButton');
+
+        // --- Event Listeners ---
         analyzeButton.addEventListener('click', runAnalysis);
+        printButton.addEventListener('click', () => window.print());
+        backButton.addEventListener('click', showDashboard);
+
 
         /**
          * Main function to run the analysis
@@ -170,15 +295,21 @@ Your tone is calm, authoritative, and solutions-oriented. Format your response w
                 return;
             }
 
+            // Check if API key is pasted
+            if (API_KEY === "YOUR_GEMINI_API_KEY_GOES_HERE") {
+                showError("Analysis failed: API_KEY is missing. Please paste your Gemini API key into the index.html file.");
+                return;
+            }
+
             // Reset UI
             loadingDiv.style.display = 'flex';
-            outputDiv.style.display = 'none';
             errorDiv.style.display = 'none';
+            reportView.style.display = 'none'; // Hide report view
             analyzeButton.disabled = true;
             analyzeButton.classList.add('opacity-50', 'cursor-not-allowed');
 
             try {
-                // Construct the payload
+                // Construct the payload for the Google API
                 const payload = {
                     contents: [{ parts: [{ text: userQuery }] }],
                     systemInstruction: {
@@ -195,34 +326,62 @@ Your tone is calm, authoritative, and solutions-oriented. Format your response w
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.error?.message || "An unknown API error occurred.");
+                    throw new Error(errorData.error?.message || "An unknown Google API error occurred.");
                 }
 
                 const result = await response.json();
 
-                if (result.candidates && result.candidates.length > 0 &&
-                    result.candidates[0].content?.parts?.[0]?.text) {
-                    
-                    const rawText = result.candidates[0].content.parts[0].text;
-                    const formattedText = formatResponse(rawText);
-                    outputContent.innerHTML = formattedText;
-                    outputDiv.style.display = 'block';
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    const formattedText = formatResponse(result.candidates[0].content.parts[0].text);
+                    // NEW: Show the report view instead of the old output div
+                    showReport(userQuery, formattedText);
                 } else {
-                    // Handle cases where the response structure is unexpected or content is missing
                     console.warn("Unexpected API response structure:", result);
                     throw new Error("No content received from the model.");
                 }
 
             } catch (error) {
                 console.error("Analysis failed:", error);
-                showError(`Analysis failed: ${error.message}. Please check the console for details.`);
+                // Handle common errors
+                if (error.message.includes('API key not valid')) {
+                     showError(`Analysis failed: Your API key is not valid. Please check it and try again.`);
+                } else {
+                     showError(`Analysis failed: ${error.message}. Please check the console for details.`);
+                }
             } finally {
-                // Restore UI
+                // Restore UI (on the dashboard, but it will be hidden)
                 loadingDiv.style.display = 'none';
                 analyzeButton.disabled = false;
                 analyzeButton.classList.remove('opacity-50', 'cursor-not-allowed');
             }
         }
+
+        /**
+         * Hides the dashboard and shows the formatted print report
+         */
+        function showReport(scenario, analysisHtml) {
+            // Populate the report fields
+            reportScenario.textContent = scenario; // Set the scenario text
+            reportContent.innerHTML = analysisHtml; // Set the analysis HTML
+
+            // Swap visibility
+            dashboardView.style.display = 'none';
+            mainFooter.style.display = 'none';
+            reportView.style.display = 'block';
+
+            // Scroll to the top of the new report
+            window.scrollTo(0, 0);
+        }
+
+        /**
+         * Hides the print report and shows the main dashboard
+         */
+        function showDashboard() {
+            reportView.style.display = 'none';
+            dashboardView.style.display = 'block';
+            mainFooter.style.display = 'block';
+        }
+
 
         /**
          * Simple formatter to turn the model's markdown-like text into HTML
@@ -231,7 +390,7 @@ Your tone is calm, authoritative, and solutions-oriented. Format your response w
             let html = text
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Bold
                 .replace(/\* (.*?):/g, '<br><strong>$1</strong>') // List items with bold leads
-                .replace(/\n/g, '<br>'); // Newlines (FIXED: removed invalid 'Z' flag)
+                .replace(/\n/g, '<br>'); // Newlines
 
             // Make the 5 main headings more prominent
             html = html.replace(/<br>(\d\.\s*<strong>.*?<\/strong>)/g, '<h3 class="text-lg font-semibold mt-4 mb-2">$1</h3>');

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Logistics Portal - DG LINC</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ep-blue: #003399; /* Official EP Blue */
+            --ep-gold: #FFCC00;
+            --text-dark: #222222;
+            --text-grey: #555555;
+            --bg-light: #f3f4f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #ffffff;
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        /* --- HEADER STYLING --- */
+        .ep-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .ep-header-left {
+            max-width: 75%;
+        }
+
+        .ep-branding {
+            color: var(--ep-blue);
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .ep-sub-branding {
+            font-size: 15px;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+
+        .ep-unit {
+            font-weight: bold;
+            font-size: 15px;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+        }
+
+        .doc-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-meta {
+            font-size: 15px;
+            color: var(--text-grey);
+            margin-bottom: 20px;
+        }
+
+        .doc-meta strong {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .ep-logo-img {
+            width: 160px;
+            height: auto;
+        }
+
+        .divider {
+            height: 2px;
+            background-color: #000;
+            border: none;
+            margin-bottom: 40px;
+        }
+
+        /* --- APP CONTAINER --- */
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 50px;
+        }
+        
+        .input-panel {
+            padding-right: 40px;
+            border-right: 1px solid #e5e7eb;
+        }
+        
+        .output-panel {
+            padding-left: 10px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ep-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        /* Form Elements */
+        .form-group { margin-bottom: 24px; }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            color: #444;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+            background: #fff;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--ep-blue);
+            box-shadow: 0 0 0 3px rgba(0, 51, 153, 0.05);
+        }
+        
+        /* --- ENHANCED MOBILE PILLS --- */
+        .quick-options {
+            display: flex;
+            gap: 10px; /* Increased gap for better spacing */
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        
+        .quick-option {
+            padding: 8px 16px; /* Larger touch target */
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 20px;
+            font-size: 13px; /* Slightly larger text */
+            color: var(--ep-blue);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            user-select: none; /* Prevents text selection on tap */
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .quick-option:hover {
+            background: var(--ep-blue);
+            color: white;
+            border-color: var(--ep-blue);
+            transform: translateY(-1px); /* Slight lift effect */
+        }
+
+        .quick-option:active {
+            transform: translateY(1px);
+        }
+        
+        .analyze-button {
+            width: 100%;
+            padding: 16px;
+            background: var(--ep-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s;
+        }
+        
+        .analyze-button:active { transform: translateY(1px); }
+        .analyze-button:hover { background: #002266; }
+
+        /* --- RESULTS STYLING --- */
+        .result-section {
+            margin-bottom: 30px;
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+        
+        /* Classification Banner */
+        .classification-banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            border-left: 5px solid;
+        }
+        
+        .classification-banner.core {
+            background: #ecfdf5;
+            border-color: var(--success);
+            color: #065f46;
+        }
+        
+        .classification-banner.non-core {
+            background: #fffbeb;
+            border-color: var(--warning);
+            color: #92400e;
+        }
+
+        /* Metric Cards */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .metric-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric-val {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--ep-blue);
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Smart Recommendations */
+        .smart-rec-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .rec-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .rec-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .rec-icon {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ep-blue);
+            flex-shrink: 0;
+        }
+
+        .rec-content h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .rec-content p {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.4;
+        }
+
+        /* Process Comparison */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .process-col {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 15px;
+        }
+
+        .process-col.old { background: #fff1f2; border-color: #fecaca; }
+        .process-col.new { background: #f0fdf4; border-color: #bbf7d0; }
+
+        .step-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .step-item {
+            font-size: 12px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-item i { width: 16px; text-align: center; }
+
+        /* Action Bar */
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #444;
+            font-weight: 600;
+        }
+
+        .action-btn:hover { background: #f9fafb; }
+
+        /* Loader & Console */
+        .processing-overlay {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .processing-overlay.active { display: block; }
+
+        .console-log {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #666;
+            margin-top: 15px;
+            height: 20px;
+        }
+
+        .spinner-ring {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(0, 51, 153, 0.1);
+            border-left-color: var(--ep-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .ep-header-container { flex-direction: column-reverse; gap: 20px; }
+            .ep-header-right { align-self: flex-start; }
+            .app-container { grid-template-columns: 1fr; }
+            .input-panel { border-right: none; border-bottom: 1px solid #e5e7eb; padding-right: 0; padding-bottom: 40px; }
+            .output-panel { padding-left: 0; }
+            .metrics-row { grid-template-columns: 1fr; }
+            .comparison-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        
+        <!-- HEADER -->
+        <header class="ep-header-container">
+            <div class="ep-header-left">
+                <div class="ep-branding">EUROPEAN PARLIAMENT</div>
+                <div class="ep-sub-branding">Directorate-General for Logistics and Interpretation for Conferences (DG LINC)</div>
+                <div class="ep-unit">Strategy and Innovation Unit</div>
+                
+                <h1 class="doc-title">DG LINC Strategic Logistics Portal</h1>
+                <div class="doc-meta">
+                    <strong>Generated by:</strong> Simion Dolha (Candidate, Administrative Manager)
+                </div>
+            </div>
+            <div class="ep-header-right">
+                <img src="https://ehnheart.org/wp-content/uploads/2023/07/euparl.png" alt="EP Logo" class="ep-logo-img">
+            </div>
+        </header>
+        
+        <hr class="divider">
+
+        <div class="app-container">
+            <!-- INPUT PANEL -->
+            <div class="input-panel">
+                <div class="section-title"><i class="fas fa-pen-to-square"></i> Meeting Parameters</div>
+                
+                <div class="form-group">
+                    <label>Meeting Organizer</label>
+                    <select id="organizer">
+                        <option value="">Select organizer type...</option>
+                        <optgroup label="Parliamentary Bodies">
+                            <option value="committee">Parliamentary Committee (AFET, ENVI...)</option>
+                            <option value="delegation">Interparliamentary Delegation</option>
+                            <option value="plenary">Plenary Session Services</option>
+                        </optgroup>
+                        <optgroup label="Political Groups">
+                            <option value="political-group">Political Group (EPP, S&D, Renew...)</option>
+                            <option value="working-group">Working Group</option>
+                        </optgroup>
+                        <optgroup label="Legislative Negotiations">
+                            <option value="trilogue-political">Trilogue (Political)</option>
+                            <option value="trilogue-tech">Trilogue (Technical)</option>
+                            <option value="shadows">Shadow Rapporteurs</option>
+                        </optgroup>
+                        <optgroup label="Other">
+                            <option value="member">Individual MEP</option>
+                            <option value="admin">DG Administration</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Location</label>
+                    <select id="location">
+                        <option value="BRU">Brussels (Triptych)</option>
+                        <option value="STR">Strasbourg (Session)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Meeting Format</label>
+                    <input type="text" id="meetingType" list="meetingTypesList" placeholder="Start typing (e.g. Coordinators...)">
+                    <datalist id="meetingTypesList">
+                        <option value="Coordinators' meeting">
+                        <option value="Ordinary Committee Session">
+                        <option value="Extraordinary Committee Session">
+                        <option value="Joint Committee Meeting (Rule 58)">
+                        <option value="Public Hearing">
+                        <option value="Interparliamentary Committee Meeting (ICM)">
+                        <option value="Group Bureau Meeting">
+                        <option value="Working Party">
+                        <option value="Press Conference">
+                        <option value="Workshop">
+                    </datalist>
+                    <div class="quick-options">
+                        <span class="quick-option" onclick="setInput('meetingType', 'Coordinators\' meeting')"><i class="fas fa-users"></i> Coordinators</span>
+                        <span class="quick-option" onclick="setInput('meetingType', 'Public Hearing')"><i class="fas fa-bullhorn"></i> Hearing</span>
+                        <span class="quick-option" onclick="setInput('meetingType', 'Trilogue')"><i class="fas fa-handshake"></i> Trilogue</span>
+                        <span class="quick-option" onclick="setInput('meetingType', 'Working Group')"><i class="fas fa-briefcase"></i> Working Group</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Participants & Logistics</label>
+                    <input type="number" id="participants" placeholder="Est. number of attendees (e.g., 45)">
+                </div>
+                
+                <div class="form-group">
+                    <label>Language Regime</label>
+                    <input type="text" id="languages" placeholder="Required languages (e.g., 23 active)">
+                    <div class="quick-options">
+                        <span class="quick-option" onclick="setInput('languages', 'EN, FR, DE (Active)')">Big 3</span>
+                        <span class="quick-option" onclick="setInput('languages', '23 Languages (Full Regime)')">Full Regime</span>
+                        <span class="quick-option" onclick="setInput('languages', 'EN (Passive)')">EN Only</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Strategic Requirements</label>
+                    <textarea id="additional" placeholder="e.g., Webstreaming required, High-level external guests, Remote speakers..."></textarea>
+                </div>
+                
+                <button class="analyze-button" onclick="runAnalysis()">
+                    <i class="fas fa-bolt"></i> Generate Action Plan
+                </button>
+            </div>
+            
+            <!-- OUTPUT PANEL -->
+            <div class="output-panel">
+                <div class="section-title"><i class="fas fa-chart-pie"></i> Strategic Analysis</div>
+                
+                <div id="emptyState" style="text-align:center; padding:60px; color:#999; border: 2px dashed #eee; border-radius:6px;">
+                    <i class="fas fa-server" style="font-size:40px; margin-bottom:20px; opacity:0.3;"></i>
+                    <h3>System Ready</h3>
+                    <p>Select parameters to query resource matrix (PERICLES/MRS).</p>
+                </div>
+                
+                <div id="loader" class="processing-overlay">
+                    <div class="spinner-ring"></div>
+                    <div class="console-log" id="consoleLog">Initializing...</div>
+                </div>
+                
+                <div id="results" style="display: none;">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- REAL EP DATA ---
+        
+        // Real EP Meeting Rooms Database
+        const roomsDB = {
+            BRU: [
+                { code: "PHS 1A002", name: "Paul-Henri Spaak Hemicycle", cap: 750, type: "Hemicycle" },
+                { code: "JAN 2Q2", name: "József Antall 2Q2", cap: 180, type: "Large Committee" },
+                { code: "JAN 4Q2", name: "József Antall 4Q2", cap: 180, type: "Large Committee" },
+                { code: "JAN 6Q2", name: "József Antall 6Q2", cap: 150, type: "Committee" },
+                { code: "ASP 1G3", name: "Altiero Spinelli 1G3", cap: 80, type: "Medium" },
+                { code: "ASP 3E2", name: "Altiero Spinelli 3E2", cap: 60, type: "Medium" },
+                { code: "ASP 5G3", name: "Altiero Spinelli 5G3", cap: 60, type: "Medium" },
+                { code: "ASP 1E2", name: "Altiero Spinelli 1E2", cap: 35, type: "Small" },
+                { code: "PHS 4B001", name: "Paul-Henri Spaak 4B001", cap: 50, type: "Medium" },
+                { code: "ASP 00G056", name: "Spinelli Box 00G", cap: 12, type: "Small/Trilogue" }
+            ],
+            STR: [
+                { code: "LOW N1.4", name: "Louise Weiss N1.4", cap: 200, type: "Large Committee" },
+                { code: "LOW N1.3", name: "Louise Weiss N1.3", cap: 150, type: "Committee" },
+                { code: "LOW S1.4", name: "Louise Weiss S1.4", cap: 120, type: "Committee" },
+                { code: "WIC 100", name: "Winston Churchill 100", cap: 80, type: "Medium" },
+                { code: "WIC 200", name: "Winston Churchill 200", cap: 80, type: "Medium" },
+                { code: "SDM S1", name: "Madariaga S1", cap: 60, type: "Medium" },
+                { code: "LOW S4.5", name: "Louise Weiss S4.5", cap: 25, type: "Small" }
+            ]
+        };
+
+        function setInput(id, val) {
+            document.getElementById(id).value = val;
+        }
+
+        function findOptimalRoom(location, pax) {
+            const availableRooms = roomsDB[location];
+            // Sort by capacity difference (smallest room that fits)
+            const suitableRooms = availableRooms.filter(r => r.cap >= pax);
+            suitableRooms.sort((a, b) => a.cap - b.cap);
+            
+            if (suitableRooms.length > 0) {
+                return suitableRooms[0];
+            }
+            // Fallback to largest if none fit
+            return availableRooms[availableRooms.length - 1];
+        }
+
+        function runAnalysis() {
+            const organizer = document.getElementById('organizer').value;
+            const type = document.getElementById('meetingType').value;
+            const location = document.getElementById('location').value;
+            const participants = parseInt(document.getElementById('participants').value) || 30;
+            
+            if(!organizer || !type) {
+                alert("Please define Organizer and Meeting Format.");
+                return;
+            }
+
+            // UI State
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('loader').classList.add('active');
+
+            // Simulation of "System Integration"
+            const buildingName = location === 'BRU' ? 'SPINELLI/ANTALL' : 'WEISS/CHURCHILL';
+            const logs = [
+                `Connecting to PERICLES (${location} Node)...`,
+                "Querying Interpreter Availability (MRS)...",
+                `Scanning ${buildingName} Occupancy...`,
+                "Calculating Carbon Footprint (EMAS 2.0)...",
+                "Verifying Rules of Procedure (Rule 216)...",
+                "Optimizing Resource Matrix..."
+            ];
+
+            let i = 0;
+            const interval = setInterval(() => {
+                if(i < logs.length) {
+                    document.getElementById('consoleLog').innerText = logs[i];
+                    i++;
+                }
+            }, 350);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                generateResults(location, participants);
+            }, 2400);
+        }
+
+        function generateResults(location, participants) {
+            const organizer = document.getElementById('organizer').value;
+            const languages = document.getElementById('languages').value || "EN";
+            
+            // Logic: Core Business
+            const isCore = (organizer === 'committee' || organizer.includes('trilogue') || organizer === 'plenary');
+            
+            // Logic: Room Selection
+            const room = findOptimalRoom(location, participants);
+            
+            // Logic: Savings
+            const costSaving = Math.floor(Math.random() * 2000) + 500;
+            const isFullRegime = languages.toLowerCase().includes('23') || languages.toLowerCase().includes('full');
+
+            const resultsDiv = document.getElementById('results');
+            const loader = document.getElementById('loader');
+            
+            let html = `
+                <!-- Classification Banner -->
+                <div class="result-section classification-banner ${isCore ? 'core' : 'non-core'}" style="animation-delay: 0.1s">
+                    <div>
+                        <h3 style="margin:0; font-size:18px;">${isCore ? 'CORE LEGISLATIVE BUSINESS' : 'GENERAL PARLIAMENTARY ACTIVITY'}</h3>
+                        <div style="font-size:13px; margin-top:4px; opacity:0.9;">
+                            <i class="fas fa-check-circle"></i> Rules of Procedure Compliant &nbsp;|&nbsp; 
+                            <i class="fas fa-layer-group"></i> Priority Level: ${isCore ? 'High (A)' : 'Standard (B)'}
+                        </div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-size:30px;"><i class="fas ${isCore ? 'fa-gavel' : 'fa-users'}"></i></div>
+                    </div>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="result-section metrics-row" style="animation-delay: 0.2s">
+                    <div class="metric-card">
+                        <div class="metric-val">${isCore ? '100%' : 'Flex'}</div>
+                        <div class="metric-label">Allocation Guarantee</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-val" style="color:#10b981;">-${Math.floor(Math.random() * 30) + 20}%</div>
+                        <div class="metric-label">Carbon Footprint (EMAS)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-val">A+</div>
+                        <div class="metric-label">Strategic Alignment</div>
+                    </div>
+                </div>
+
+                <!-- Smart Recommendations -->
+                <div class="result-section smart-rec-box" style="animation-delay: 0.3s">
+                    <div class="section-title" style="border:none; margin-bottom:15px; font-size:14px;">
+                        <i class="fas fa-robot"></i> AI Resource Allocation Strategy
+                    </div>
+                    
+                    <div class="rec-item">
+                        <div class="rec-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="rec-content">
+                            <h4>Optimal Location: ${room.name} (${room.code})</h4>
+                            <p>Selected from ${location} inventory based on capacity (${room.cap} pax) and meeting typology (${room.type}).</p>
+                        </div>
+                    </div>
+
+                    <div class="rec-item">
+                        <div class="rec-icon"><i class="fas fa-headset"></i></div>
+                        <div class="rec-content">
+                            <h4>Interpretation Regime: ${isFullRegime ? 'Full Team (23 Active)' : 'Targeted / Ad-hoc'}</h4>
+                            <p>${isFullRegime ? 'Allocated from permanent staff booths due to core legislative nature.' : 'Optimized for requested languages only. Passive EN provided via automated transcription.'}</p>
+                        </div>
+                    </div>
+
+                    <div class="rec-item">
+                        <div class="rec-icon"><i class="fas fa-euro-sign"></i></div>
+                        <div class="rec-content">
+                            <h4>Fiscal Efficiency: €${costSaving} projected savings</h4>
+                            <p>Achieved by bundling technical request with adjacent meeting in ${room.code.split(' ')[0]}.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process Comparison -->
+                <div class="result-section comparison-container" style="animation-delay: 0.4s">
+                    <div class="process-col old">
+                        <h4 style="color:#991b1b; display:flex; align-items:center; gap:8px;">
+                            <i class="fas fa-exclamation-triangle"></i> Legacy Workflow
+                        </h4>
+                        <ul class="step-list" style="color:#7f1d1d;">
+                            <li class="step-item"><i class="fas fa-times"></i> Submit MRS Request (Form A)</li>
+                            <li class="step-item"><i class="fas fa-times"></i> Wait for DG LINC Validation (48h)</li>
+                            <li class="step-item"><i class="fas fa-times"></i> Separate Request for Interpreters</li>
+                            <li class="step-item"><i class="fas fa-times"></i> Email Ushers for Room Setup</li>
+                            <li class="step-item"><i class="fas fa-times"></i> Final Confirmation Re-check</li>
+                        </ul>
+                    </div>
+                    <div class="process-col new">
+                        <h4 style="color:#065f46; display:flex; align-items:center; gap:8px;">
+                            <i class="fas fa-magic"></i> Simplified Workflow
+                        </h4>
+                        <ul class="step-list" style="color:#064e3b;">
+                            <li class="step-item"><i class="fas fa-check"></i> <b>Single Unified Entry Point</b></li>
+                            <li class="step-item"><i class="fas fa-check"></i> AI-driven Resource Matching</li>
+                            <li class="step-item"><i class="fas fa-check"></i> Auto-Notification to All Services</li>
+                            <li class="step-item"><i class="fas fa-check"></i> <b>Instant Confirmation</b></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Action Bar -->
+                <div class="result-section action-bar" style="animation-delay: 0.5s">
+                    <button class="action-btn"><i class="fas fa-file-pdf"></i> Export Briefing</button>
+                    <button class="action-btn"><i class="fas fa-envelope"></i> Send to Unit Head</button>
+                    <button class="action-btn" style="background:var(--ep-blue); color:white; border:none;">
+                        <i class="fas fa-calendar-check"></i> Confirm Allocation
+                    </button>
+                </div>
+            `;
+
+            loader.classList.remove('active');
+            resultsDiv.innerHTML = html;
+            resultsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

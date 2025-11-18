@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Resilience Analysis - DG LINC</title>
+    <style>
+        :root {
+            --ep-blue: #003399; /* Official EP Blue */
+            --ep-gold: #FFCC00;
+            --text-dark: #222222;
+            --text-grey: #666666;
+            --bg-light: #f9fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, Helvetica, sans-serif; /* Standard official font stack */
+            background: #ffffff;
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        /* --- HEADER STYLING TO MATCH IMAGE --- */
+        .ep-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .ep-header-left {
+            max-width: 70%;
+        }
+
+        .ep-branding {
+            color: var(--ep-blue);
+            font-weight: bold;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .ep-sub-branding {
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .ep-unit {
+            font-weight: bold;
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+        }
+
+        .doc-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #000;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .doc-meta {
+            font-size: 16px;
+            color: var(--text-grey);
+            margin-bottom: 20px;
+        }
+
+        .doc-meta strong {
+            font-weight: 600;
+            color: var(--text-grey);
+        }
+
+        .ep-logo-img {
+            width: 180px;
+            height: auto;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #000; /* Solid black line like in photo */
+            border: none;
+            margin-bottom: 40px;
+        }
+
+        /* --- APP CONTAINER (Modified to fit new style) --- */
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            /* Removed shadow/rounded corners to look more like a document */
+        }
+        
+        .input-panel {
+            padding-right: 40px;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        .output-panel {
+            padding-left: 10px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--ep-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc; /* Simpler border */
+            border-radius: 4px; /* Less rounded */
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--ep-blue);
+            box-shadow: 0 0 0 2px rgba(0, 51, 153, 0.1);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .quick-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        
+        .quick-option {
+            padding: 4px 10px;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--ep-blue);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .quick-option:hover {
+            background: var(--ep-blue);
+            color: white;
+        }
+        
+        .analyze-button {
+            width: 100%;
+            padding: 14px;
+            background: var(--ep-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .analyze-button:hover {
+            background: #002266;
+        }
+        
+        /* --- RESULTS STYLING --- */
+        .result-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .classification {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .classification.core {
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+            color: #065f46;
+        }
+        
+        .classification.non-core {
+            background: #fffbeb;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+        }
+        
+        .classification-icon { font-size: 24px; }
+        .classification-text h3 { margin: 0; font-size: 18px; }
+        .classification-text p { margin: 2px 0 0 0; font-size: 13px; }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .service-item {
+            padding: 8px 12px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .service-item.required { border-left: 3px solid #10b981; }
+        .service-item.optional { border-left: 3px solid #f59e0b; }
+        
+        .process-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .process-column h4 { font-size: 13px; margin-bottom: 8px; color: #555; }
+        
+        .step {
+            padding: 6px;
+            font-size: 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .step-number {
+            background: #eee;
+            color: #555;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        
+        .savings-box {
+            background: var(--ep-blue);
+            color: white;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        .savings-box h4 { color: white; margin-bottom: 10px; }
+        
+        .savings-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+        
+        .saving-value { font-size: 24px; font-weight: bold; }
+        .saving-label { font-size: 11px; opacity: 0.9; }
+        
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .loader.active { display: block; }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--ep-blue);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            border: 2px dashed #e0e0e0;
+            border-radius: 6px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .ep-header-container {
+                flex-direction: column-reverse;
+                gap: 20px;
+            }
+            
+            .ep-header-right {
+                align-self: flex-start;
+            }
+
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-panel {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+                padding-right: 0;
+                padding-bottom: 40px;
+            }
+            
+            .output-panel {
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        
+        <header class="ep-header-container">
+            <div class="ep-header-left">
+                <div class="ep-branding">EUROPEAN PARLIAMENT</div>
+                <div class="ep-sub-branding">Directorate-General for Logistics and Interpretation for Conferences (DG LINC)</div>
+                <div class="ep-unit">Strategy and Innovation Unit</div>
+                
+                <h1 class="doc-title">Strategic Resilience Analysis</h1>
+                <div class="doc-meta">
+                    <strong>Generated by:</strong> Simion Dolha (Candidate, Administrative Manager)
+                </div>
+            </div>
+            
+            <div class="ep-header-right">
+                <img src="https://ehnheart.org/wp-content/uploads/2023/07/euparl.png" alt="European Parliament Logo" class="ep-logo-img">
+            </div>
+        </header>
+        
+        <hr class="divider">
+
+        <div class="app-container">
+            <div class="input-panel">
+                <div class="section-title">📝 Meeting Request Input</div>
+                
+                <div class="form-group">
+                    <label for="organizer">Meeting Organizer</label>
+                    <select id="organizer">
+                        <option value="">Select organizer type...</option>
+                        <option value="committee">Parliamentary Committee</option>
+                        <option value="political-group">Political Group</option>
+                        <option value="member">Individual MEP</option>
+                        <option value="external">External Organization</option>
+                        <option value="admin">EP Administration</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="meetingType">Meeting Type</label>
+                    <input type="text" id="meetingType" placeholder="e.g., Legislative hearing, Working group...">
+                    <div class="quick-options">
+                        <span class="quick-option" onclick="setMeetingType('Committee Meeting')">Committee Meeting</span>
+                        <span class="quick-option" onclick="setMeetingType('Trilogue')">Trilogue</span>
+                        <span class="quick-option" onclick="setMeetingType('Public Hearing')">Public Hearing</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="participants">Expected Participants</label>
+                    <input type="number" id="participants" placeholder="Number of participants">
+                </div>
+                
+                <div class="form-group">
+                    <label for="languages">Languages Required</label>
+                    <input type="text" id="languages" placeholder="e.g., EN, FR, DE...">
+                    <div class="quick-options">
+                        <span class="quick-option" onclick="setLanguages('EN, FR, DE')">Big 3</span>
+                        <span class="quick-option" onclick="setLanguages('All 24')">All 24</span>
+                        <span class="quick-option" onclick="setLanguages('EN')">English Only</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="additional">Additional Requirements</label>
+                    <textarea id="additional" placeholder="Remote participants, recording needs, catering, etc."></textarea>
+                </div>
+                
+                <button class="analyze-button" onclick="analyzeRequest()">
+                    <span>⚙️ Analyze & Simplify Process</span>
+                </button>
+            </div>
+            
+            <div class="output-panel">
+                <div class="section-title">📊 Analysis Results</div>
+                
+                <div id="emptyState" class="empty-state">
+                    <h3>Awaiting Input</h3>
+                    <p>Enter meeting details to generate a Strategic Resilience Analysis.</p>
+                </div>
+                
+                <div id="loader" class="loader">
+                    <div class="spinner"></div>
+                    <p>Consulting resource matrix...</p>
+                </div>
+                
+                <div id="results" style="display: none;">
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function setMeetingType(type) {
+            document.getElementById('meetingType').value = type;
+        }
+        
+        function setLanguages(langs) {
+            document.getElementById('languages').value = langs;
+        }
+        
+        function analyzeRequest() {
+            const organizer = document.getElementById('organizer').value;
+            const meetingType = document.getElementById('meetingType').value;
+            const participants = document.getElementById('participants').value;
+            const languages = document.getElementById('languages').value;
+            const additional = document.getElementById('additional').value;
+            
+            if (!organizer || !meetingType) {
+                alert('Please fill in at least the organizer and meeting type');
+                return;
+            }
+            
+            // UI Transition
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('loader').classList.add('active');
+            
+            // Logic & Processing
+            setTimeout(() => {
+                generateResults(organizer, meetingType, participants, languages, additional);
+            }, 1200);
+        }
+        
+        function generateResults(organizer, meetingType, participants, languages, additional) {
+            const loader = document.getElementById('loader');
+            const results = document.getElementById('results');
+            
+            // 1. Logic: Core vs Non-Core
+            const isCore = (organizer === 'committee' || 
+                           meetingType.toLowerCase().includes('legislative') || 
+                           meetingType.toLowerCase().includes('trilogue') ||
+                           meetingType.toLowerCase().includes('scrutiny'));
+            
+            // 2. Logic: Complexity
+            const langCount = languages.split(',').length;
+            const needsRemote = additional.toLowerCase().includes('remote');
+            
+            // 3. Data: Comparisons
+            const oldSteps = ['Submit initial request (MRS)', 'Wait for room allocation', 'Request Interpretation', 'Contact Conference Tech', 'Submit Protocol request', 'Coordinate Security', 'Follow up with units'];
+            const newSteps = ['Submit unified request', 'AI Automated Allocation', 'Single Confirmation'];
+            
+            // 4. Data: Savings
+            const timeSavedHours = isCore ? 12 : 6;
+            const costSaved = Math.round(Math.random() * 500) + 200;
+
+            const html = `
+                <div class="classification ${isCore ? 'core' : 'non-core'}">
+                    <div class="classification-icon">${isCore ? '🏛️' : '📈'}</div>
+                    <div class="classification-text">
+                        <h3>${isCore ? 'CORE LEGISLATIVE BUSINESS' : 'GENERAL PARLIAMENTARY ACTIVITY'}</h3>
+                        <p>${isCore ? 'Priority allocation authorized. Full resource availability.' : 'Flexible resource allocation recommended.'}</p>
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <h4>🎯 Resource Requirements</h4>
+                    <div class="service-grid">
+                        <div class="service-item required">✅ Meeting Room (${participants || 30} pax)</div>
+                        <div class="service-item ${langCount > 1 ? 'required' : 'optional'}">${langCount > 1 ? '✅' : '⚪'} Interpretation (${langCount} lang)</div>
+                        <div class="service-item ${needsRemote ? 'required' : 'optional'}">${needsRemote ? '✅' : '⚪'} Hybrid/Remote Setup</div>
+                        <div class="service-item required">✅ Technical Support</div>
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <h4>⚡ Workflow Simplification</h4>
+                    <div class="process-comparison">
+                        <div class="process-column">
+                            <h4>❌ Traditional Process (7+ steps)</h4>
+                            ${oldSteps.slice(0,4).map((s,i) => `<div class="step"><span class="step-number">${i+1}</span>${s}</div>`).join('')}
+                            <div class="step" style="color:#999; justify-content:center;">... 3 more steps</div>
+                        </div>
+                        <div class="process-column" style="background:#f0fdf4; border-radius:4px;">
+                            <h4>✅ Simplified Process</h4>
+                            ${newSteps.map((s,i) => `<div class="step" style="background:white;"><span class="step-number" style="background:#10b981; color:white;">${i+1}</span><b>${s}</b></div>`).join('')}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="savings-box">
+                    <h4>💰 Efficiency Gains</h4>
+                    <div class="savings-grid">
+                        <div class="saving-item">
+                            <div class="saving-value">${timeSavedHours}h</div>
+                            <div class="saving-label">Admin Time Saved</div>
+                        </div>
+                        <div class="saving-item">
+                            <div class="saving-value">€${costSaved}</div>
+                            <div class="saving-label">Cost Avoidance</div>
+                        </div>
+                        <div class="saving-item">
+                            <div class="saving-value">100%</div>
+                            <div class="saving-label">Compliance</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            loader.classList.remove('active');
+            results.innerHTML = html;
+            results.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

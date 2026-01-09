@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRONOS Autonomy Strategy - Kalkan Defense Systems</title>
+<style>
+@page {
+  size: A4;
+  margin: 2cm;
+}
+body {
+  font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #1a1a1a;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+h1 {
+  color: #0d47a1;
+  font-size: 24pt;
+  border-bottom: 3px solid #0d47a1;
+  padding-bottom: 10px;
+  margin-top: 0;
+}
+h2 {
+  color: #1565c0;
+  font-size: 16pt;
+  border-bottom: 1px solid #1565c0;
+  padding-bottom: 5px;
+  margin-top: 30px;
+  page-break-after: avoid;
+}
+h3 {
+  color: #1976d2;
+  font-size: 13pt;
+  margin-top: 20px;
+  page-break-after: avoid;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 15px 0;
+  font-size: 10pt;
+  page-break-inside: avoid;
+}
+th {
+  background-color: #1565c0;
+  color: white;
+  padding: 10px 8px;
+  text-align: left;
+  font-weight: 600;
+}
+td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+.diagram-box {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+  border: 2px solid #1565c0;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  page-break-inside: avoid;
+}
+.diagram-title {
+  font-weight: bold;
+  color: #0d47a1;
+  font-size: 12pt;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.layer {
+  background: white;
+  border: 1px solid #90caf9;
+  border-radius: 5px;
+  padding: 12px;
+  margin: 10px 0;
+}
+.layer-title {
+  font-weight: bold;
+  color: #1565c0;
+  margin-bottom: 8px;
+}
+.layer-content {
+  font-size: 10pt;
+  color: #424242;
+}
+.arrow {
+  text-align: center;
+  font-size: 20pt;
+  color: #1565c0;
+  margin: 5px 0;
+}
+.highlight-box {
+  background-color: #e3f2fd;
+  border-left: 4px solid #1565c0;
+  padding: 15px;
+  margin: 15px 0;
+  page-break-inside: avoid;
+}
+.warning-box {
+  background-color: #fff3e0;
+  border-left: 4px solid #ff9800;
+  padding: 15px;
+  margin: 15px 0;
+}
+.success-box {
+  background-color: #e8f5e9;
+  border-left: 4px solid #4caf50;
+  padding: 15px;
+  margin: 15px 0;
+}
+.meta-info {
+  background-color: #f5f5f5;
+  padding: 15px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+}
+.meta-info p {
+  margin: 5px 0;
+}
+.page-break {
+  page-break-before: always;
+}
+ul {
+  margin: 10px 0;
+  padding-left: 25px;
+}
+li {
+  margin: 5px 0;
+}
+strong {
+  color: #0d47a1;
+}
+.toc {
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+.toc-title {
+  font-weight: bold;
+  font-size: 14pt;
+  margin-bottom: 15px;
+  color: #1565c0;
+}
+.two-column {
+  display: flex;
+  gap: 20px;
+}
+.column {
+  flex: 1;
+}
+.kpi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 15px 0;
+}
+.kpi-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+}
+.kpi-value {
+  font-size: 24pt;
+  font-weight: bold;
+  color: #1565c0;
+}
+.kpi-label {
+  font-size: 10pt;
+  color: #666;
+}
+</style>
+</head>
+<body>
+
+<h1>KRONOS Autonomy Strategy</h1>
+<p style="font-size: 14pt; color: #666; margin-top: -10px;">A Technical Roadmap for Kalkan Defense Systems</p>
+
+<div class="meta-info">
+<p><strong>Prepared by:</strong> SD</p>
+<p><strong>Position:</strong> CTO for AI — Candidate Presentation</p>
+<p><strong>Date:</strong> January 2026</p>
+</div>
+
+<h2>Executive Summary</h2>
+
+<p>This document presents a production-grade autonomy strategy for Kalkan Defense Systems. The approach is grounded in three principles:</p>
+
+<ol>
+<li><strong>Ship validated autonomy</strong> — Deploy working systems with available technology and iterate through a replay-driven verification loop</li>
+<li><strong>Cert-ready architecture</strong> — Learned components propose actions; deterministic controls and runtime monitors enforce invariants</li>
+<li><strong>Honest engineering</strong> — Realistic timelines and budgets and technology choices based on what exists today</li>
+</ol>
+
+<div class="highlight-box">
+<strong>Core Principle:</strong> We explicitly separate flight-critical control (deterministic and testable) from mission autonomy (learning-based) connected through a runtime assurance contract that can always degrade to safe behaviors.
+</div>
+
+<p>The strategy delivers operational autonomous capability across KRONOS and C1/R1/S1 platforms within 18-30 months and is architected to absorb next-generation compute (NVIDIA Rubin/Feynman) and AI models (reasoning VLAs and world models) through 2030 without fundamental redesign.</p>
+
+<div class="kpi-grid">
+<div class="kpi-card">
+<div class="kpi-value">18</div>
+<div class="kpi-label">Months to V1.0</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-value">35.6M€</div>
+<div class="kpi-label">3-Year Investment</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-value">20→40</div>
+<div class="kpi-label">Team FTE Growth</div>
+</div>
+<div class="kpi-card">
+<div class="kpi-value">2030</div>
+<div class="kpi-label">Future-Proof Horizon</div>
+</div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>Part I: Autonomy Vision for KDS</h2>
+
+<h3>1.1 Autonomy Levels</h3>
+
+<table>
+<tr>
+<th>Level</th>
+<th>Definition</th>
+<th>Human Role</th>
+<th>Target</th>
+</tr>
+<tr>
+<td><strong>L1: Assisted</strong></td>
+<td>Human commands. System executes.</td>
+<td>Direct control</td>
+<td>All (baseline)</td>
+</tr>
+<tr>
+<td><strong>L2: Supervised</strong></td>
+<td>System proposes. Human approves.</td>
+<td>Approval authority</td>
+<td>R1 Corvus / S1 Vultur</td>
+</tr>
+<tr>
+<td><strong>L3: Delegated</strong></td>
+<td>System acts within bounds. Human monitors.</td>
+<td>Exception handling</td>
+<td>All platforms (target)</td>
+</tr>
+<tr>
+<td><strong>L4: Trusted</strong></td>
+<td>System acts autonomously. Human reviews post-hoc.</td>
+<td>Strategic oversight</td>
+<td>C1 Strigoi (future)</td>
+</tr>
+</table>
+
+<div class="warning-box">
+<strong>Critical Constraint:</strong> Lethal actions require human authorization at all autonomy levels. This is non-negotiable.
+</div>
+
+<h3>1.2 Architectural Separation Principle</h3>
+
+<div class="diagram-box">
+<div class="diagram-title">KRONOS Three-Layer Architecture</div>
+
+<div class="layer">
+<div class="layer-title">🧠 MISSION AUTONOMY (Learning-Based)</div>
+<div class="layer-content">
+Perception | Tactical Planning | World Prediction<br>
+• ML components propose bounded guidance<br>
+• Outputs are suggestions with confidence bounds<br>
+• Outside certification boundary<br>
+• Constrained by enforceable contracts
+</div>
+</div>
+
+<div class="arrow">⬇</div>
+
+<div class="layer" style="background-color: #fff8e1;">
+<div class="layer-title">🛡️ RUNTIME ASSURANCE (RTA)</div>
+<div class="layer-content">
+• Command validation<br>
+• Envelope enforcement<br>
+• Invariant monitoring<br>
+• Degradation triggers
+</div>
+</div>
+
+<div class="arrow">⬇</div>
+
+<div class="layer" style="background-color: #e8f5e9;">
+<div class="layer-title">✈️ FLIGHT-CRITICAL CONTROL (Deterministic / PX4-Based)</div>
+<div class="layer-content">
+Stabilization | Attitude | Navigation | Safety<br>
+• Deterministic and testable<br>
+• Cert-ready safety kernel<br>
+• ML is NOT in this loop<br>
+• Can always degrade to safe behaviors
+</div>
+</div>
+</div>
+
+<div class="highlight-box">
+<strong>Key Insight:</strong> We take the lesson from end-to-end systems (learning robustness from data) but apply it inside a safety-critical structure. Learned components propose actions; deterministic controls and runtime monitors enforce invariants.
+</div>
+
+<div class="page-break"></div>
+
+<h2>Part II: Operating Design Domain (ODD)</h2>
+
+<h3>2.1 V1.0 ODD Constraints</h3>
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>V1.0 Limit</th>
+<th>Violation Response</th>
+</tr>
+<tr>
+<td><strong>Weather</strong></td>
+<td>VMC only / wind &lt;15 m/s / no precipitation</td>
+<td>Mission abort → RTH</td>
+</tr>
+<tr>
+<td><strong>Visibility</strong></td>
+<td>&gt;5 km / daylight or adequate IR contrast</td>
+<td>Degrade to waypoint-only</td>
+</tr>
+<tr>
+<td><strong>Altitude</strong></td>
+<td>50-500m AGL</td>
+<td>Hard envelope → RTH</td>
+</tr>
+<tr>
+<td><strong>Speed</strong></td>
+<td>&lt;40 m/s</td>
+<td>Command rejection</td>
+</tr>
+<tr>
+<td><strong>Mission Duration</strong></td>
+<td>&lt;2 hours</td>
+<td>Automatic RTH at limit</td>
+</tr>
+<tr>
+<td><strong>Comms</strong></td>
+<td>Link available / &lt;30s dropout tolerance</td>
+<td>RTH after timeout</td>
+</tr>
+<tr>
+<td><strong>GPS</strong></td>
+<td>Available / PDOP &lt;4</td>
+<td>Degrade to visual nav or RTH</td>
+</tr>
+<tr>
+<td><strong>Temperature</strong></td>
+<td>-10°C to +45°C ambient</td>
+<td>Thermal throttle → RTH</td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>Non-urban / clear airspace</td>
+<td>Geofence enforcement</td>
+</tr>
+</table>
+
+<h3>2.2 V2.0 ODD Expansion</h3>
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>V2.0 Limit</th>
+<th>Enabling Technology</th>
+</tr>
+<tr>
+<td><strong>Weather</strong></td>
+<td>Light rain / wind &lt;25 m/s</td>
+<td>Improved sensor fusion</td>
+</tr>
+<tr>
+<td><strong>Visibility</strong></td>
+<td>Degraded vis with IR/thermal</td>
+<td>Multi-modal perception</td>
+</tr>
+<tr>
+<td><strong>Mission Duration</strong></td>
+<td>&lt;4 hours</td>
+<td>World model efficiency</td>
+</tr>
+<tr>
+<td><strong>Comms</strong></td>
+<td>Extended dropout (5 min)</td>
+<td>Onboard replanning</td>
+</tr>
+<tr>
+<td><strong>GPS</strong></td>
+<td>GPS-denied capable</td>
+<td>Visual-inertial navigation</td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>Semi-urban / coordinated airspace</td>
+<td>Traffic awareness</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part III: Technology Strategy</h2>
+
+<h3>3.1 Build vs Buy Analysis</h3>
+
+<table>
+<tr>
+<th>Component</th>
+<th>Decision</th>
+<th>Rationale</th>
+</tr>
+<tr>
+<td><strong>Compute Platform</strong></td>
+<td>Buy (Jetson Thor)</td>
+<td>2070 TFLOPS / 128GB / proven ecosystem</td>
+</tr>
+<tr>
+<td><strong>Flight Controller</strong></td>
+<td>Buy (PX4-based)</td>
+<td>Mature / auditable / large community</td>
+</tr>
+<tr>
+<td><strong>Perception Models</strong></td>
+<td>Adapt (MiniCPM-V / SmolVLA)</td>
+<td>Open weights / edge-validated</td>
+</tr>
+<tr>
+<td><strong>World Model</strong></td>
+<td>Adapt (V-JEPA 2)</td>
+<td>Meta's latest / robotics-validated</td>
+</tr>
+<tr>
+<td><strong>Sensor Fusion</strong></td>
+<td>Build</td>
+<td>Mission-specific / sensor-agnostic</td>
+</tr>
+<tr>
+<td><strong>Mission Planner</strong></td>
+<td>Build</td>
+<td>Core differentiator</td>
+</tr>
+<tr>
+<td><strong>Runtime Assurance</strong></td>
+<td>Build</td>
+<td>Critical / must control fully</td>
+</tr>
+<tr>
+<td><strong>Simulation</strong></td>
+<td>Hybrid</td>
+<td>Isaac Sim + custom scenarios</td>
+</tr>
+</table>
+
+<h3>3.2 Hardware Platform: NVIDIA Jetson Thor</h3>
+
+<table>
+<tr>
+<th>Specification</th>
+<th>Value</th>
+<th>Implication</th>
+</tr>
+<tr>
+<td>AI Performance</td>
+<td>2070 FP4 TFLOPS</td>
+<td>Runs all required models simultaneously</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>128 GB</td>
+<td>No memory constraints for foreseeable future</td>
+</tr>
+<tr>
+<td>Power</td>
+<td>40-130W configurable</td>
+<td>Fits all platform power budgets</td>
+</tr>
+<tr>
+<td>Availability</td>
+<td>Now (August 2025 GA)</td>
+<td>No schedule risk</td>
+</tr>
+<tr>
+<td>Ecosystem</td>
+<td>2M+ developers</td>
+<td>Talent pool and tooling available</td>
+</tr>
+</table>
+
+<h3>3.3 AI Model Stack</h3>
+
+<table>
+<tr>
+<th>Function</th>
+<th>Model</th>
+<th>Parameters</th>
+<th>Rate</th>
+</tr>
+<tr>
+<td><strong>Reactive Control</strong></td>
+<td>SmolVLA</td>
+<td>450M</td>
+<td>50 Hz</td>
+</tr>
+<tr>
+<td><strong>Tactical Reasoning</strong></td>
+<td>MiniCPM-V 8B</td>
+<td>8B</td>
+<td>5 Hz</td>
+</tr>
+<tr>
+<td><strong>World Prediction</strong></td>
+<td>V-JEPA 2-AC</td>
+<td>2B</td>
+<td>1 Hz</td>
+</tr>
+<tr>
+<td><strong>Fallback Detection</strong></td>
+<td>YOLO v8</td>
+<td>25M</td>
+<td>100 Hz</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part IV: PX4 Integration Architecture</h2>
+
+<h3>4.1 Why PX4</h3>
+
+<table>
+<tr>
+<th>Criterion</th>
+<th>PX4 Advantage</th>
+</tr>
+<tr>
+<td><strong>Maturity</strong></td>
+<td>10+ years of development / millions of flight hours</td>
+</tr>
+<tr>
+<td><strong>Auditability</strong></td>
+<td>Open source / full code visibility / documented architecture</td>
+</tr>
+<tr>
+<td><strong>Community</strong></td>
+<td>Large contributor base / active maintenance / commercial support</td>
+</tr>
+<tr>
+<td><strong>Hardware Support</strong></td>
+<td>Broad flight controller compatibility (Pixhawk series)</td>
+</tr>
+<tr>
+<td><strong>Certification Path</strong></td>
+<td>Used as basis for certified systems / known to regulators</td>
+</tr>
+<tr>
+<td><strong>Failsafe Framework</strong></td>
+<td>Built-in geofence / RTH / battery failsafe / link loss handling</td>
+</tr>
+</table>
+
+<h3>4.2 PX4 Role in KRONOS Architecture</h3>
+
+<div class="diagram-box">
+<div class="diagram-title">Onboard System Architecture</div>
+
+<div class="layer">
+<div class="layer-title">💻 JETSON THOR (Mission Computer)</div>
+<div class="layer-content">
+<strong>Perception:</strong> SmolVLA | <strong>Planning:</strong> MiniCPM-V | <strong>World Model:</strong> V-JEPA 2<br><br>
+Outputs: Velocity/Position Guidance Commands
+</div>
+</div>
+
+<div class="arrow">⬇ MAVLink</div>
+
+<div class="layer" style="background-color: #e8f5e9;">
+<div class="layer-title">🎮 PX4 FLIGHT CONTROLLER (Pixhawk 6X)</div>
+<div class="layer-content">
+<strong>Modules:</strong> Commander (Mode Mgmt) | Navigator (Waypoint) | Estimator (EKF2)<br>
+<strong>Safety:</strong> Geofence (Hard) | Failsafe (RTH/Land) | Control (Rate/Att)<br><br>
+<strong>Safety Invariants Enforced Here:</strong><br>
+• Geofence containment • Attitude limits • Velocity bounds<br>
+• Battery reserve • Link loss response
+</div>
+</div>
+
+<div class="arrow">⬇</div>
+
+<div class="layer" style="background-color: #f5f5f5;">
+<div class="layer-title">⚙️ ACTUATORS (Motors/Servos)</div>
+</div>
+</div>
+
+<h3>4.3 What AI Can and Cannot Do</h3>
+
+<div class="two-column">
+<div class="column">
+<div class="success-box">
+<strong>AI CAN:</strong>
+<ul>
+<li>Request position/velocity targets</li>
+<li>Request mode changes (PX4 validates)</li>
+<li>Access all sensor data</li>
+<li>Log everything</li>
+</ul>
+</div>
+</div>
+<div class="column">
+<div class="warning-box">
+<strong>AI CANNOT:</strong>
+<ul>
+<li>Touch the stabilization loop</li>
+<li>Override geofence</li>
+<li>Bypass failsafes</li>
+<li>Control motors directly</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="highlight-box">
+<strong>Key Safety Property:</strong> If AI fails completely and PX4 continues to fly safely. This is the fundamental safety guarantee.
+</div>
+
+<div class="page-break"></div>
+
+<h2>Part V: Real-Time Execution Budget</h2>
+
+<h3>5.1 End-to-End Timing Budget</h3>
+
+<table>
+<tr>
+<th>Stage</th>
+<th>Component</th>
+<th>Worst-Case</th>
+</tr>
+<tr>
+<td>Sensor Ingest</td>
+<td>Camera capture + DMA</td>
+<td>5 ms</td>
+</tr>
+<tr>
+<td>Preprocessing</td>
+<td>Debayer + normalize + resize</td>
+<td>3 ms</td>
+</tr>
+<tr>
+<td>Perception Inference</td>
+<td>SmolVLA forward pass</td>
+<td>12 ms</td>
+</tr>
+<tr>
+<td>Tactical Inference</td>
+<td>MiniCPM-V (async at 5Hz)</td>
+<td>180 ms</td>
+</tr>
+<tr>
+<td>Postprocessing</td>
+<td>Coordinate transform</td>
+<td>2 ms</td>
+</tr>
+<tr>
+<td>RTA Validation</td>
+<td>Envelope + feasibility check</td>
+<td>1 ms</td>
+</tr>
+<tr>
+<td>Command Send</td>
+<td>MAVLink serialization + TX</td>
+<td>2 ms</td>
+</tr>
+<tr style="background-color: #e3f2fd;">
+<td><strong>TOTAL (Reactive Path)</strong></td>
+<td></td>
+<td><strong>25 ms = 40Hz guaranteed</strong></td>
+</tr>
+</table>
+
+<h3>5.2 Compute Partitioning</h3>
+
+<table>
+<tr>
+<th>Resource</th>
+<th>Allocation</th>
+<th>Priority</th>
+</tr>
+<tr>
+<td colspan="3" style="background-color: #e3f2fd;"><strong>GPU (Blackwell)</strong></td>
+</tr>
+<tr>
+<td>MIG Slice 1</td>
+<td>SmolVLA (50Hz)</td>
+<td>RT Priority</td>
+</tr>
+<tr>
+<td>MIG Slice 2</td>
+<td>MiniCPM-V (5Hz)</td>
+<td>High</td>
+</tr>
+<tr>
+<td>MIG Slice 3</td>
+<td>V-JEPA 2 (1Hz)</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td colspan="3" style="background-color: #e8f5e9;"><strong>CPU (14-core ARM Neoverse)</strong></td>
+</tr>
+<tr>
+<td>Cores 0-1</td>
+<td>RTA (RT_FIFO / Isolated)</td>
+<td>Critical</td>
+</tr>
+<tr>
+<td>Cores 2-5</td>
+<td>Sensor Ingest</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Cores 6-9</td>
+<td>Planning / Comms</td>
+<td>Normal</td>
+</tr>
+<tr>
+<td>Cores 10-13</td>
+<td>Logging / Telemetry</td>
+<td>Low</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part VI: Runtime Assurance (RTA) Architecture</h2>
+
+<div class="diagram-box">
+<div class="diagram-title">Runtime Assurance System</div>
+
+<div class="layer" style="background-color: #fff8e1;">
+<div class="layer-title">🔍 SAFETY MONITOR</div>
+<div class="layer-content">
+<strong>Verified Invariants:</strong><br>
+• Geofence containment (PX4 GF module)<br>
+• Attitude limits (roll &lt; 60° / pitch &lt; 45°)<br>
+• Velocity bounds (PX4 MPC parameters)<br>
+• Energy reserve (PX4 battery failsafe)<br>
+• Altitude floor/ceiling<br>
+• Rate limits (angular and linear)<br><br>
+<strong>Implementation:</strong> PX4 Commander + Custom Extensions<br>
+<strong>Latency:</strong> &lt;1 ms guaranteed
+</div>
+</div>
+
+<div class="two-column" style="margin-top: 15px;">
+<div class="column">
+<div class="layer">
+<div class="layer-title">✅ COMMAND VALIDATOR (Jetson)</div>
+<div class="layer-content">
+• Rate check<br>
+• Feasibility<br>
+• Continuity<br>
+• Envelope precheck<br><br>
+<em>Output: Pass / Reject / Clamp</em>
+</div>
+</div>
+</div>
+<div class="column">
+<div class="layer" style="background-color: #e8f5e9;">
+<div class="layer-title">🔄 RECOVERY CONTROLLER (PX4)</div>
+<div class="layer-content">
+• Hold position<br>
+• Controlled climb<br>
+• Return to home<br>
+• Emergency land<br><br>
+<em>PX4 Flight Modes</em>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<h3>6.1 Certification Approach</h3>
+
+<table>
+<tr>
+<th>Component</th>
+<th>Certification Boundary</th>
+<th>Assurance Level</th>
+</tr>
+<tr>
+<td>PX4 Flight Control</td>
+<td>Inside boundary</td>
+<td>Cert-ready (basis for certified derivatives)</td>
+</tr>
+<tr>
+<td>PX4 Failsafes</td>
+<td>Inside boundary</td>
+<td>High (auditable and testable)</td>
+</tr>
+<tr>
+<td>Custom RTA Extensions</td>
+<td>Inside boundary</td>
+<td>High (formal methods applicable)</td>
+</tr>
+<tr>
+<td>ML Perception</td>
+<td>Outside boundary</td>
+<td>Constrained by contracts</td>
+</tr>
+<tr>
+<td>ML Planning</td>
+<td>Outside boundary</td>
+<td>Constrained by contracts</td>
+</tr>
+<tr>
+<td>World Model</td>
+<td>Outside boundary</td>
+<td>Constrained by contracts</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part VII: Why Rust — Language Strategy</h2>
+
+<h3>7.1 The Safety-Critical Software Challenge</h3>
+
+<p>Traditional aerospace software is dominated by C. Its language characteristics make it trivial to accidentally introduce memory safety issues:</p>
+
+<table>
+<tr>
+<th>C/C++ Vulnerability Class</th>
+<th>Prevalence</th>
+<th>Consequence</th>
+</tr>
+<tr>
+<td>Buffer overflow</td>
+<td>~70% of CVEs</td>
+<td>Arbitrary code execution</td>
+</tr>
+<tr>
+<td>Use-after-free</td>
+<td>Common</td>
+<td>Unpredictable behavior</td>
+</tr>
+<tr>
+<td>Null pointer dereference</td>
+<td>Very common</td>
+<td>System crash</td>
+</tr>
+<tr>
+<td>Data races</td>
+<td>Hard to detect</td>
+<td>Intermittent failures</td>
+</tr>
+<tr>
+<td>Integer overflow</td>
+<td>Common</td>
+<td>Wrong calculations</td>
+</tr>
+</table>
+
+<h3>7.2 Why Rust for KRONOS</h3>
+
+<table>
+<tr>
+<th>Rust Property</th>
+<th>Benefit for KRONOS</th>
+</tr>
+<tr>
+<td><strong>Memory Safety</strong></td>
+<td>Eliminates entire vulnerability classes at compile time</td>
+</tr>
+<tr>
+<td><strong>Fearless Concurrency</strong></td>
+<td>Safe multi-threaded code for sensor fusion and planning</td>
+</tr>
+<tr>
+<td><strong>Zero-Cost Abstractions</strong></td>
+<td>High-level code with C-like performance</td>
+</tr>
+<tr>
+<td><strong>No Garbage Collection</strong></td>
+<td>Predictable latency for real-time systems</td>
+</tr>
+<tr>
+<td><strong>Modern Tooling</strong></td>
+<td>Faster development and fewer bugs (Cargo / clippy)</td>
+</tr>
+</table>
+
+<h3>7.3 Industry Validation</h3>
+
+<table>
+<tr>
+<th>Organization</th>
+<th>Rust Adoption</th>
+<th>Domain</th>
+</tr>
+<tr>
+<td><strong>Ferrous Systems</strong></td>
+<td>Ferrocene compiler qualified ISO 26262 (ASIL D) / IEC 61508 (SIL 4)</td>
+<td>Automotive / Industrial</td>
+</tr>
+<tr>
+<td><strong>AdaCore</strong></td>
+<td>GNAT Pro for Rust with long-term support</td>
+<td>Aerospace / Defense</td>
+</tr>
+<tr>
+<td><strong>Safety-Critical Rust Consortium</strong></td>
+<td>Developing DO-178 qualification path</td>
+<td>Aerospace</td>
+</tr>
+<tr>
+<td><strong>Microsoft / Amazon / Google</strong></td>
+<td>Windows kernel / Firecracker / Android kernel</td>
+<td>Operating Systems</td>
+</tr>
+<tr>
+<td><strong>Volvo</strong></td>
+<td>Evaluating for vehicle software</td>
+<td>Automotive</td>
+</tr>
+</table>
+
+<div class="highlight-box">
+<em>"I think Rust has huge potential to allow us to produce higher quality code up front at a lower cost."</em><br>
+— Johannes Foufas, Lead Architect Software, Volvo Cars
+</div>
+
+<h3>7.4 Rust in the KRONOS Stack</h3>
+
+<table>
+<tr>
+<th>Component</th>
+<th>Language</th>
+<th>Rationale</th>
+</tr>
+<tr>
+<td>Mission Planner</td>
+<td>Rust</td>
+<td>Safety-critical / concurrent / performance</td>
+</tr>
+<tr>
+<td>Sensor Fusion</td>
+<td>Rust</td>
+<td>Real-time / memory-intensive / concurrent</td>
+</tr>
+<tr>
+<td>RTA Extensions</td>
+<td>Rust</td>
+<td>Safety-critical / must be provably correct</td>
+</tr>
+<tr>
+<td>Telemetry Pipeline</td>
+<td>Rust</td>
+<td>High throughput / concurrent</td>
+</tr>
+<tr>
+<td>ML Inference Wrapper</td>
+<td>Rust + Python</td>
+<td>Interface to TensorRT</td>
+</tr>
+<tr>
+<td>Simulation / ML Training</td>
+<td>Python</td>
+<td>Industry standard / ecosystem</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part VIII: Future-Proofing and Technology Evolution</h2>
+
+<h3>8.1 NVIDIA Compute Roadmap</h3>
+
+<table>
+<tr>
+<th>Generation</th>
+<th>Timeline</th>
+<th>Key Specs</th>
+<th>KRONOS Integration</th>
+</tr>
+<tr>
+<td><strong>Blackwell (Thor)</strong></td>
+<td>Now (2025-2026)</td>
+<td>2070 FP4 TFLOPS / 128GB</td>
+<td>V1.0 deployment platform</td>
+</tr>
+<tr>
+<td><strong>Rubin</strong></td>
+<td>H2 2026</td>
+<td>~3x Blackwell perf</td>
+<td>V2.0 upgrade path</td>
+</tr>
+<tr>
+<td><strong>Rubin Ultra</strong></td>
+<td>H2 2027</td>
+<td>Quad-die / extreme density</td>
+<td>Future scaling</td>
+</tr>
+<tr>
+<td><strong>Feynman</strong></td>
+<td>2028-2029</td>
+<td>Next paradigm (N2 node)</td>
+<td>Long-term roadmap</td>
+</tr>
+</table>
+
+<h3>8.2 Architecture for Compute Evolution</h3>
+
+<div class="diagram-box">
+<div class="diagram-title">Hardware Abstraction Strategy</div>
+
+<div class="layer">
+<div class="layer-title">📱 APPLICATION LAYER</div>
+<div class="layer-content">
+Mission Logic | Planning | Coordination<br>
+• Pure Rust and Python • No hardware dependencies • Portable across platforms
+</div>
+</div>
+
+<div class="arrow">⬇</div>
+
+<div class="layer" style="background-color: #fff8e1;">
+<div class="layer-title">🔄 INFERENCE ABSTRACTION</div>
+<div class="layer-content">
+• ONNX format for all models<br>
+• TensorRT optimization at deployment<br>
+• Runtime model loading (no recompile)
+</div>
+</div>
+
+<div class="arrow">⬇</div>
+
+<div class="layer" style="background-color: #e8f5e9;">
+<div class="layer-title">⚡ HARDWARE LAYER</div>
+<div class="layer-content">
+Thor (2026) → Rubin (2027) → Feynman (2029)<br>
+<strong>Same software / different hardware</strong><br>
+Upgrade = swap module + re-optimize TensorRT
+</div>
+</div>
+</div>
+
+<h3>8.3 What More Compute Enables</h3>
+
+<table>
+<tr>
+<th>Capability</th>
+<th>Thor (V1.0)</th>
+<th>Rubin (V2.0)</th>
+<th>Feynman (V3.0)</th>
+</tr>
+<tr>
+<td><strong>Reactive VLA</strong></td>
+<td>SmolVLA 450M @ 50Hz</td>
+<td>OpenVLA 7B @ 50Hz</td>
+<td>Larger VLA @ 100Hz</td>
+</tr>
+<tr>
+<td><strong>Tactical VLM</strong></td>
+<td>MiniCPM-V 8B @ 5Hz</td>
+<td>Qwen2.5-VL 32B @ 10Hz</td>
+<td>Reasoning VLM @ 20Hz</td>
+</tr>
+<tr>
+<td><strong>World Model</strong></td>
+<td>V-JEPA 2 @ 1Hz</td>
+<td>Cosmos Predict @ 5Hz</td>
+<td>Full physics @ 10Hz</td>
+</tr>
+<tr>
+<td><strong>Planning Horizon</strong></td>
+<td>30 seconds</td>
+<td>2 minutes</td>
+<td>10 minutes</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part IX: AI Model Evolution Predictions</h2>
+
+<h3>9.1 Vision-Language-Action (VLA) Model Trajectory</h3>
+
+<table>
+<tr>
+<th>Generation</th>
+<th>Representative</th>
+<th>Key Innovation</th>
+<th>KRONOS Relevance</th>
+</tr>
+<tr>
+<td><strong>Gen 1 (2023)</strong></td>
+<td>RT-2</td>
+<td>VLM → discrete action tokens</td>
+<td>Proved concept</td>
+</tr>
+<tr>
+<td><strong>Gen 2 (2024)</strong></td>
+<td>OpenVLA / π0</td>
+<td>Open weights / diffusion actions</td>
+<td>Current baseline</td>
+</tr>
+<tr>
+<td><strong>Gen 3 (2025)</strong></td>
+<td>SmolVLA / GR00T N1.5</td>
+<td>Edge efficiency / dual-system</td>
+<td>V1.0 deployment</td>
+</tr>
+<tr>
+<td><strong>Gen 4 (2026)</strong></td>
+<td>Reasoning VLAs</td>
+<td>Chain-of-thought for actions</td>
+<td>V2.0 target</td>
+</tr>
+<tr>
+<td><strong>Gen 5 (2027+)</strong></td>
+<td>Embodied foundation models</td>
+<td>Cross-embodiment transfer</td>
+<td>V3.0 planning</td>
+</tr>
+</table>
+
+<h3>9.2 KRONOS Model Upgrade Path</h3>
+
+<table>
+<tr>
+<th>Version</th>
+<th>Target</th>
+<th>Perception</th>
+<th>Planning</th>
+<th>World Model</th>
+</tr>
+<tr>
+<td><strong>V1.0</strong></td>
+<td>Month 18</td>
+<td>SmolVLA 450M</td>
+<td>MiniCPM-V 8B</td>
+<td>V-JEPA 2</td>
+</tr>
+<tr>
+<td><strong>V1.5</strong></td>
+<td>Month 24</td>
+<td>SmolVLA 450M</td>
+<td>MiniCPM-V 8B</td>
+<td>Cosmos Predict</td>
+</tr>
+<tr>
+<td><strong>V2.0</strong></td>
+<td>Month 30</td>
+<td>OpenVLA 7B</td>
+<td>Reasoning VLM</td>
+<td>Cosmos Predict 2.x</td>
+</tr>
+<tr>
+<td><strong>V2.5</strong></td>
+<td>Month 36</td>
+<td>Next-gen VLA</td>
+<td>Next-gen VLM</td>
+<td>Physics world model</td>
+</tr>
+<tr>
+<td><strong>V3.0</strong></td>
+<td>Month 42+</td>
+<td>Foundation VLA</td>
+<td>Foundation VLM</td>
+<td>Unified world model</td>
+</tr>
+</table>
+
+<h3>9.3 Model Selection Criteria (Evergreen)</h3>
+
+<table>
+<tr>
+<th>Criterion</th>
+<th>Requirement</th>
+<th>Rationale</th>
+</tr>
+<tr>
+<td><strong>Open Weights</strong></td>
+<td>Required</td>
+<td>No vendor lock-in / full control</td>
+</tr>
+<tr>
+<td><strong>Edge Validated</strong></td>
+<td>Required</td>
+<td>Must run on Jetson-class hardware</td>
+</tr>
+<tr>
+<td><strong>Reproducible</strong></td>
+<td>Required</td>
+<td>Deterministic inference</td>
+</tr>
+<tr>
+<td><strong>Active Development</strong></td>
+<td>Strongly Preferred</td>
+<td>Ongoing improvements</td>
+</tr>
+<tr>
+<td><strong>Safety Benchmarks</strong></td>
+<td>Required</td>
+<td>OOD detection / uncertainty</td>
+</tr>
+<tr>
+<td><strong>License</strong></td>
+<td>Apache 2.0 or similar</td>
+<td>Commercial deployment</td>
+</tr>
+</table>
+
+<h3>9.4 What We Are NOT Betting On</h3>
+
+<table>
+<tr>
+<th>Technology</th>
+<th>Why We Avoid</th>
+</tr>
+<tr>
+<td>Closed models</td>
+<td>No control / vendor lock-in / uncertain availability</td>
+</tr>
+<tr>
+<td>Continuous online learning</td>
+<td>Unsolved safety problem for deployment</td>
+</tr>
+<tr>
+<td>End-to-end raw-to-actuator</td>
+<td>Cannot certify / cannot explain</td>
+</tr>
+<tr>
+<td>Speculative hardware</td>
+<td>Schedule risk too high</td>
+</tr>
+<tr>
+<td>Single-vendor dependency</td>
+<td>Business and technical risk</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part X: Data Strategy</h2>
+
+<h3>10.1 Data Capture Specification</h3>
+
+<table>
+<tr>
+<th>Data Type</th>
+<th>Rate</th>
+<th>Format</th>
+<th>Retention</th>
+</tr>
+<tr>
+<td>EO Camera (raw)</td>
+<td>30 Hz</td>
+<td>H.265 lossless</td>
+<td>90 days</td>
+</tr>
+<tr>
+<td>IR/Thermal</td>
+<td>30 Hz</td>
+<td>16-bit TIFF</td>
+<td>90 days</td>
+</tr>
+<tr>
+<td>IMU (full rate)</td>
+<td>400 Hz</td>
+<td>Binary + timestamps</td>
+<td>Permanent</td>
+</tr>
+<tr>
+<td>AI Model Inputs</td>
+<td>Per inference</td>
+<td>Tensor snapshots</td>
+<td>90 days</td>
+</tr>
+<tr>
+<td>AI Model Outputs</td>
+<td>Per inference</td>
+<td>JSON + confidence</td>
+<td>Permanent</td>
+</tr>
+<tr>
+<td>RTA State</td>
+<td>100 Hz</td>
+<td>Binary log</td>
+<td>Permanent</td>
+</tr>
+<tr>
+<td>PX4 Telemetry</td>
+<td>50 Hz</td>
+<td>ULog format</td>
+<td>Permanent</td>
+</tr>
+</table>
+
+<h3>10.2 Incident Workflow</h3>
+
+<div class="diagram-box">
+<div class="diagram-title">DETECT → REPLAY → ANALYZE → FIX → VERIFY → RELEASE</div>
+<div class="layer-content" style="font-size: 11pt;">
+<strong>1. DETECT:</strong> Automated anomaly detection + operator reports + RTA events<br>
+<strong>2. REPLAY:</strong> Full sensor replay in simulation within 24 hours<br>
+<strong>3. ANALYZE:</strong> Root cause identification + similar incident search<br>
+<strong>4. FIX:</strong> Code/model change + test case added to regression suite<br>
+<strong>5. VERIFY:</strong> Replay shows correct behavior + regression suite passes<br>
+<strong>6. RELEASE:</strong> Documentation + deployment approval + monitoring
+</div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>Part XI: Degraded Mode Operations</h2>
+
+<h3>11.1 Fault Response Matrix</h3>
+
+<table>
+<tr>
+<th>Fault</th>
+<th>Detection</th>
+<th>Response</th>
+<th>Recovery</th>
+</tr>
+<tr>
+<td>EO Camera loss</td>
+<td>Frame timeout</td>
+<td>Switch to IR/thermal</td>
+<td>Auto if sensor returns</td>
+</tr>
+<tr>
+<td>IR Camera loss</td>
+<td>Frame timeout</td>
+<td>EO-only mode</td>
+<td>Auto if sensor returns</td>
+</tr>
+<tr>
+<td>All cameras loss</td>
+<td>No valid frames</td>
+<td>RTH (blind)</td>
+<td>Manual only</td>
+</tr>
+<tr>
+<td>GPS loss</td>
+<td>Receiver status</td>
+<td>Visual-inertial nav</td>
+<td>Auto on reacquisition</td>
+</tr>
+<tr>
+<td>IMU degradation</td>
+<td>Covariance growth</td>
+<td>Cross-check + filter</td>
+<td>May require land</td>
+</tr>
+<tr>
+<td>Comms dropout</td>
+<td>Heartbeat timeout</td>
+<td>Hold → RTH sequence</td>
+<td>Auto on link restore</td>
+</tr>
+<tr>
+<td>Jetson hang</td>
+<td>Watchdog timeout</td>
+<td>PX4 takes over → RTH</td>
+<td>Requires restart</td>
+</tr>
+<tr>
+<td>AI confidence low</td>
+<td>Output uncertainty</td>
+<td>Widen safety margins</td>
+<td>Auto</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part XII: Security Architecture</h2>
+
+<h3>12.1 Secure Boot and Updates</h3>
+
+<table>
+<tr>
+<th>Aspect</th>
+<th>Implementation</th>
+</tr>
+<tr>
+<td><strong>Boot chain</strong></td>
+<td>Hardware root of trust → signed bootloader → signed kernel → signed application</td>
+</tr>
+<tr>
+<td><strong>Update delivery</strong></td>
+<td>Encrypted channel / signed packages / version rollback protection</td>
+</tr>
+<tr>
+<td><strong>Model artifacts</strong></td>
+<td>Signed with build provenance / hash verification before load</td>
+</tr>
+<tr>
+<td><strong>Configuration</strong></td>
+<td>Signed mission files / tamper-evident storage</td>
+</tr>
+</table>
+
+<h3>12.2 Network Segmentation</h3>
+
+<div class="diagram-box">
+<div class="diagram-title">Network Architecture</div>
+
+<div class="two-column">
+<div class="column">
+<div class="layer" style="background-color: #e8f5e9;">
+<div class="layer-title">🛡️ SAFETY DOMAIN (PX4 + RTA)</div>
+<div class="layer-content">
+• Isolated network<br>
+• No external access
+</div>
+</div>
+</div>
+<div class="column">
+<div class="layer">
+<div class="layer-title">🧠 MISSION DOMAIN (Jetson Thor)</div>
+<div class="layer-content">
+• Separate network<br>
+• Filtered comms
+</div>
+</div>
+</div>
+</div>
+
+<div class="layer" style="background-color: #fff8e1; margin-top: 15px;">
+<div class="layer-title">🔒 GATEWAY/FILTER</div>
+<div class="layer-content">
+One-way: Mission → Safety (commands only)<br>
+Validated message format / Rate limited
+</div>
+</div>
+</div>
+
+<div class="page-break"></div>
+
+<h2>Part XIII: Simulation and V&V Strategy</h2>
+
+<h3>13.1 Simulation Infrastructure</h3>
+
+<table>
+<tr>
+<th>Component</th>
+<th>Technology</th>
+<th>Purpose</th>
+</tr>
+<tr>
+<td>Physics Engine</td>
+<td>NVIDIA Isaac Sim</td>
+<td>High-fidelity flight dynamics</td>
+</tr>
+<tr>
+<td>Scenario Generation</td>
+<td>Custom + Procedural</td>
+<td>Adversarial and edge cases</td>
+</tr>
+<tr>
+<td>Sensor Simulation</td>
+<td>Isaac Sim sensors</td>
+<td>EO/IR synthetic data</td>
+</tr>
+<tr>
+<td>AI-in-the-Loop</td>
+<td>Identical deployment</td>
+<td>Same models as flight</td>
+</tr>
+<tr>
+<td>PX4 SITL</td>
+<td>PX4 Autopilot</td>
+<td>Flight controller behavior</td>
+</tr>
+</table>
+
+<h3>13.2 Autonomy KPIs</h3>
+
+<table>
+<tr>
+<th>Category</th>
+<th>Metric</th>
+<th>V1.0 Target</th>
+<th>V2.0 Target</th>
+</tr>
+<tr>
+<td><strong>Latency</strong></td>
+<td>Sensor-to-action (P99)</td>
+<td>&lt;25 ms</td>
+<td>&lt;20 ms</td>
+</tr>
+<tr>
+<td><strong>Reliability</strong></td>
+<td>Mission completion (ODD)</td>
+<td>95%</td>
+<td>99%</td>
+</tr>
+<tr>
+<td><strong>Safety</strong></td>
+<td>RTA violations</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>Safety</strong></td>
+<td>RTH success rate</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>Operator</strong></td>
+<td>Interventions per hour</td>
+<td>&lt;2</td>
+<td>&lt;0.5</td>
+</tr>
+<tr>
+<td><strong>Data</strong></td>
+<td>Missions replayable</td>
+<td>100%</td>
+<td>100%</td>
+</tr>
+<tr>
+<td><strong>Process</strong></td>
+<td>Anomaly → fix time</td>
+<td>&lt;14 days</td>
+<td>&lt;7 days</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part XIV: Organization Plan</h2>
+
+<h3>14.1 Team Structure</h3>
+
+<table>
+<tr>
+<th>Team</th>
+<th>Year 1 FTE</th>
+<th>Year 3 FTE</th>
+<th>Focus</th>
+</tr>
+<tr>
+<td><strong>Perception and Fusion</strong></td>
+<td>6</td>
+<td>12</td>
+<td>CV/ML / sensors / fusion</td>
+</tr>
+<tr>
+<td><strong>Planning and Control</strong></td>
+<td>8</td>
+<td>16</td>
+<td>VLM/VLA / mission / RTA</td>
+</tr>
+<tr>
+<td><strong>Simulation and V&V</strong></td>
+<td>5</td>
+<td>10</td>
+<td>Isaac Sim / test / MLOps</td>
+</tr>
+<tr>
+<td><strong>Support</strong></td>
+<td>1</td>
+<td>2</td>
+<td>DevOps / infrastructure</td>
+</tr>
+<tr style="background-color: #e3f2fd;">
+<td><strong>TOTAL</strong></td>
+<td><strong>20</strong></td>
+<td><strong>40</strong></td>
+<td></td>
+</tr>
+</table>
+
+<h3>14.2 Key Hires (First 90 Days)</h3>
+
+<table>
+<tr>
+<th>Role</th>
+<th>Priority</th>
+<th>Profile</th>
+</tr>
+<tr>
+<td>Perception Lead</td>
+<td>Critical</td>
+<td>CV/ML / sensor fusion / edge deployment</td>
+</tr>
+<tr>
+<td>Planning Lead</td>
+<td>Critical</td>
+<td>Robotics planning / VLM/VLA experience</td>
+</tr>
+<tr>
+<td>Simulation Lead</td>
+<td>Critical</td>
+<td>Isaac Sim / scenario generation / V&V</td>
+</tr>
+<tr>
+<td>Safety Engineer</td>
+<td>High</td>
+<td>Aerospace safety / certification experience</td>
+</tr>
+<tr>
+<td>MLOps Engineer</td>
+<td>High</td>
+<td>Model deployment / monitoring / edge</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part XV: Execution Timeline</h2>
+
+<h3>15.1 First 90 Days</h3>
+
+<table>
+<tr>
+<th>Week</th>
+<th>Milestone</th>
+</tr>
+<tr>
+<td>1-2</td>
+<td>Architecture review and tech stack validation</td>
+</tr>
+<tr>
+<td>3-4</td>
+<td>Simulation environment setup (Isaac Sim + PX4 SITL)</td>
+</tr>
+<tr>
+<td>5-6</td>
+<td>Key hires initiated</td>
+</tr>
+<tr>
+<td>7-8</td>
+<td>First AI models running in simulation</td>
+</tr>
+<tr>
+<td>9-10</td>
+<td>Telemetry and logging pipeline operational</td>
+</tr>
+<tr>
+<td>11-12</td>
+<td>V&V plan documented and approved</td>
+</tr>
+</table>
+
+<h3>15.2 18-Month Roadmap</h3>
+
+<table>
+<tr>
+<th>Phase</th>
+<th>Duration</th>
+<th>Deliverable</th>
+</tr>
+<tr>
+<td><strong>Simulation Ready</strong></td>
+<td>Months 1-3</td>
+<td>Full sim environment operational</td>
+</tr>
+<tr>
+<td><strong>HIL Ready</strong></td>
+<td>Months 4-6</td>
+<td>Hardware-in-loop validation with PX4</td>
+</tr>
+<tr>
+<td><strong>Flight Ready</strong></td>
+<td>Months 7-9</td>
+<td>First autonomous flights</td>
+</tr>
+<tr>
+<td><strong>Continuous Flight Test</strong></td>
+<td>Months 10-17</td>
+<td>Ongoing flight validation</td>
+</tr>
+<tr style="background-color: #e3f2fd;">
+<td><strong>V1.0 SHIP</strong></td>
+<td>Month 18</td>
+<td>Production release</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part XVI: Budget Summary</h2>
+
+<h3>16.1 Three-Year Investment</h3>
+
+<table>
+<tr>
+<th>Category</th>
+<th>Year 1</th>
+<th>Year 2</th>
+<th>Year 3</th>
+<th>Total</th>
+</tr>
+<tr>
+<td>Personnel</td>
+<td>4.0M €</td>
+<td>6.0M €</td>
+<td>8.0M €</td>
+<td>18.0M €</td>
+</tr>
+<tr>
+<td>Hardware (airframes + compute)</td>
+<td>1.5M €</td>
+<td>2.0M €</td>
+<td>3.0M €</td>
+<td>6.5M €</td>
+</tr>
+<tr>
+<td>Simulation infrastructure</td>
+<td>0.3M €</td>
+<td>0.2M €</td>
+<td>0.2M €</td>
+<td>0.7M €</td>
+</tr>
+<tr>
+<td>Flight test operations</td>
+<td>0.5M €</td>
+<td>1.0M €</td>
+<td>1.5M €</td>
+<td>3.0M €</td>
+</tr>
+<tr>
+<td>Certification</td>
+<td>0.3M €</td>
+<td>0.5M €</td>
+<td>0.7M €</td>
+<td>1.5M €</td>
+</tr>
+<tr>
+<td>Contingency (20%)</td>
+<td>1.3M €</td>
+<td>1.9M €</td>
+<td>2.7M €</td>
+<td>5.9M €</td>
+</tr>
+<tr style="background-color: #e3f2fd;">
+<td><strong>TOTAL</strong></td>
+<td><strong>7.9M €</strong></td>
+<td><strong>11.6M €</strong></td>
+<td><strong>16.1M €</strong></td>
+<td><strong>35.6M €</strong></td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part XVII: Competitive Technology Thesis</h2>
+
+<h3>17.1 Where Incumbents Lead</h3>
+
+<table>
+<tr>
+<th>Incumbent Advantage</th>
+<th>Our Response</th>
+</tr>
+<tr>
+<td>Integration maturity</td>
+<td>Focus on autonomy depth not breadth</td>
+</tr>
+<tr>
+<td>Procurement momentum</td>
+<td>Target programs valuing autonomy innovation</td>
+</tr>
+<tr>
+<td>Hardware volume</td>
+<td>Software differentiation / not hardware competition</td>
+</tr>
+</table>
+
+<h3>17.2 Where KRONOS Wins</h3>
+
+<table>
+<tr>
+<th>Moat</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><strong>A: Autonomy Reliability Flywheel</strong></td>
+<td>Full telemetry / replay-first debugging / eval gating per release</td>
+</tr>
+<tr>
+<td><strong>B: Cert-Ready Boundary Design</strong></td>
+<td>Small auditable PX4 safety kernel / strict contracts / fail-safe independent of ML</td>
+</tr>
+<tr>
+<td><strong>C: Platform Leverage</strong></td>
+<td>KRONOS as reusable integration surface / common tooling</td>
+</tr>
+<tr>
+<td><strong>D: Edge Efficiency</strong></td>
+<td>TensorRT/ONNX optimization / predictable thermal/power performance</td>
+</tr>
+</table>
+
+<h3>17.3 Proof Points We Will Measure</h3>
+
+<table>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Why It Matters</th>
+</tr>
+<tr>
+<td>Time from anomaly → validated fix</td>
+<td>&lt;14 days (V1) / &lt;7 days (V2)</td>
+<td>Faster iteration than competitors</td>
+</tr>
+<tr>
+<td>% missions replayable</td>
+<td>100%</td>
+<td>Complete observability</td>
+</tr>
+<tr>
+<td>Safety envelope violations</td>
+<td>0</td>
+<td>Non-negotiable</td>
+</tr>
+<tr>
+<td>Autonomy regression escape rate</td>
+<td>&lt;1% after V1</td>
+<td>Quality compounding</td>
+</tr>
+<tr>
+<td>Validated autonomy hours/month</td>
+<td>Growing</td>
+<td>Rate advantage compounds</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part XVIII: Risk Management</h2>
+
+<h3>18.1 Technical Risks</h3>
+
+<table>
+<tr>
+<th>Risk</th>
+<th>Likelihood</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+<tr>
+<td>VLM latency exceeds target</td>
+<td>Medium</td>
+<td>High</td>
+<td>Fallback to classical planning</td>
+</tr>
+<tr>
+<td>Sim-to-real gap</td>
+<td>High</td>
+<td>High</td>
+<td>Domain randomization / early flight</td>
+</tr>
+<tr>
+<td>PX4 integration complexity</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Early prototyping / community support</td>
+</tr>
+<tr>
+<td>Edge compute thermal</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Conservative power budget</td>
+</tr>
+</table>
+
+<h3>18.2 Programmatic Risks</h3>
+
+<table>
+<tr>
+<th>Risk</th>
+<th>Likelihood</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+<tr>
+<td>Key hire delays</td>
+<td>Medium</td>
+<td>High</td>
+<td>Parallel search / competitive comp</td>
+</tr>
+<tr>
+<td>Certification delays</td>
+<td>High</td>
+<td>Medium</td>
+<td>Early engagement / incremental approvals</td>
+</tr>
+<tr>
+<td>NVIDIA roadmap delays</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Architecture absorbs delays gracefully</td>
+</tr>
+<tr>
+<td>Model obsolescence</td>
+<td>Medium</td>
+<td>Low</td>
+<td>ONNX abstraction / modular design</td>
+</tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>Part XIX: Conclusion</h2>
+
+<h3>Why KRONOS Will Win</h3>
+
+<p>KRONOS is not a bet on a single model. It is a bet on a <strong>repeatable engineering system</strong> that converts operational experience into validated autonomy faster than competitors.</p>
+
+<div class="success-box">
+<strong>Our advantage comes from three compounding loops:</strong>
+<ol>
+<li><strong>Replay-driven pipeline</strong> — Every flight becomes training and verification evidence. Anomalies are reproducible in hours not weeks.</li>
+<li><strong>Cert-ready safety boundary</strong> — Learning components are bounded and failure-tolerant. PX4 provides an auditable safety kernel that operates independent of ML behavior.</li>
+<li><strong>Future-proof architecture</strong> — ONNX models on abstracted compute mean we absorb NVIDIA's Rubin and Feynman generations and next-generation VLAs and world models without redesign.</li>
+</ol>
+</div>
+
+<p><strong>This combination delivers:</strong></p>
+<ul>
+<li>Ship useful autonomy early (V1.0 in 18 months)</li>
+<li>Expand capability safely (bounded by enforceable contracts)</li>
+<li>Improve at a rate that scales with every hour flown</li>
+<li>Upgrade compute and models without application rewrites</li>
+</ul>
+
+<p>Competitors can match individual components: hardware or models or demos. A tightly-instrumented autonomy factory that produces measurable reliability gains every release while staying ahead of the technology curve is harder to replicate.</p>
+
+<div class="highlight-box" style="text-align: center; font-size: 12pt;">
+<strong>KRONOS wins by making autonomy predictable and auditable and continuously improving.<br>
+Execution speed and assurance become durable advantage.</strong>
+</div>
+
+<div class="page-break"></div>
+
+<h2>Appendix A: Technical Reference</h2>
+
+<h3>A.1 Available AI Models (January 2026)</h3>
+
+<table>
+<tr>
+<th>Model</th>
+<th>Organization</th>
+<th>Params</th>
+<th>Edge</th>
+<th>Open</th>
+</tr>
+<tr>
+<td>SmolVLA</td>
+<td>Hugging Face</td>
+<td>450M</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>MiniCPM-V</td>
+<td>OpenBMB</td>
+<td>8B</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>V-JEPA 2</td>
+<td>Meta</td>
+<td>2B</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>GR00T N1.6</td>
+<td>NVIDIA</td>
+<td>2B</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>OpenVLA</td>
+<td>Stanford</td>
+<td>7B</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Cosmos Predict 2.5</td>
+<td>NVIDIA</td>
+<td>Various</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</table>
+
+<h3>A.2 Standards Reference</h3>
+
+<table>
+<tr>
+<th>Standard</th>
+<th>Domain</th>
+<th>Relevance</th>
+</tr>
+<tr>
+<td>DO-178C</td>
+<td>Software</td>
+<td>Flight-critical software</td>
+</tr>
+<tr>
+<td>DO-254</td>
+<td>Hardware</td>
+<td>Programmable logic</td>
+</tr>
+<tr>
+<td>ARP4754A</td>
+<td>Systems</td>
+<td>Development assurance</td>
+</tr>
+<tr>
+<td>MIL-STD-882</td>
+<td>Safety</td>
+<td>System safety</td>
+</tr>
+<tr>
+<td>STANAG 4671</td>
+<td>UAV</td>
+<td>NATO airworthiness</td>
+</tr>
+</table>
+
+<hr>
+
+<p style="text-align: center; color: #666; margin-top: 40px;">
+<em>Document prepared for Kalkan Defense Systems CTO for AI position</em><br>
+<strong>SD — January 2026</strong>
+</p>
+
+</body>
+</html>
